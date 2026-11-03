@@ -1,0 +1,118 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_DISABLED: 'is-disabled';
+$IS_ERROR: 'is-error';
+$IS_INDETERMINATE: 'is-indeterminate';
+$SIZE_LG: 'bsCheckboxSizeLg';
+$SIZE_MD: 'bsCheckboxSizeMd';
+$SIZE_SM: 'bsCheckboxSizeSm';
+
+.bsCheckbox {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(8px);
+  cursor: pointer;
+  user-select: none;
+  color: var(--m2m-pg-comp-text);
+
+  &.#{$IS_DISABLED} {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.bsCheckboxInput {
+  @include hidden;
+}
+
+.bsCheckboxBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: rem(2px) solid var(--m2m-pg-comp-text-disabled);
+  border-radius: rem(4px);
+  background-color: var(--m2m-pg-comp-bg);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.bsCheckboxCheck {
+  width: 60%;
+  height: 60%;
+  color: #fff;
+  opacity: 0;
+}
+
+.bsCheckboxDash {
+  position: absolute;
+  width: 55%;
+  height: rem(2px);
+  border-radius: rem(1px);
+  background-color: #fff;
+  opacity: 0;
+}
+
+/* ── checked / indeterminate ──────────── */
+.bsCheckboxInput:checked ~ .bsCheckboxBox,
+.bsCheckbox.#{$IS_INDETERMINATE} .bsCheckboxBox {
+  border-color: var(--m2m-pg-brand);
+  background-color: var(--m2m-pg-brand);
+}
+
+.bsCheckboxInput:checked ~ .bsCheckboxBox .bsCheckboxCheck {
+  opacity: 1;
+}
+
+.bsCheckbox.#{$IS_INDETERMINATE} .bsCheckboxBox .bsCheckboxCheck {
+  opacity: 0;
+}
+
+.bsCheckbox.#{$IS_INDETERMINATE} .bsCheckboxBox .bsCheckboxDash {
+  opacity: 1;
+}
+
+/* ── focus / error ────────────────────── */
+.bsCheckboxInput:focus-visible ~ .bsCheckboxBox {
+  outline: rem(2px) solid var(--m2m-pg-brand);
+  outline-offset: rem(2px);
+}
+
+.bsCheckbox.#{$IS_ERROR} .bsCheckboxBox {
+  border-color: var(--m2m-pg-error);
+}
+
+.bsCheckboxLabel {
+  @include typo('Head/Regular');
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  .bsCheckboxBox {
+    width: rem(14px);
+    height: rem(14px);
+  }
+  .bsCheckboxLabel {
+    @include typo('Sub/Regular');
+  }
+}
+
+.#{$SIZE_MD} {
+  .bsCheckboxBox {
+    width: rem(18px);
+    height: rem(18px);
+  }
+}
+
+.#{$SIZE_LG} {
+  .bsCheckboxBox {
+    width: rem(22px);
+    height: rem(22px);
+  }
+  .bsCheckboxLabel {
+    @include typo('Title3/Regular');
+  }
+}

@@ -1,0 +1,66 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_FADE: 'is-fade';
+$IS_LOADED: 'is-loaded';
+
+@keyframes bsImageM2mImageShimmer {
+  0% {
+    background-position: -150% 0;
+  }
+  100% {
+    background-position: 250% 0;
+  }
+}
+
+.bsImage {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  line-height: 0;
+}
+
+.bsImageImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+.bsImage.#{$IS_FADE} .bsImageImg {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.bsImage.#{$IS_FADE}.#{$IS_LOADED} .bsImageImg {
+  opacity: 1;
+}
+
+.bsImageSkeleton {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    90deg,
+    var(--m2m-pg-comp-bg-subtle) 0%,
+    var(--m2m-pg-comp-bg-hover) 50%,
+    var(--m2m-pg-comp-bg-subtle) 100%
+  );
+  background-size: 200% 100%;
+  animation: bsImageM2mImageShimmer 1.4s ease-in-out infinite;
+}
+
+.bsImageError {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: rem(6px);
+  color: var(--m2m-pg-comp-text-disabled);
+  line-height: 1.4;
+}
+
+.bsImageErrorText {
+  @include typo('Caption/Regular');
+}

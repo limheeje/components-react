@@ -1,0 +1,25 @@
+# Switch
+
+네이티브 `<input type="checkbox" role="switch">` 기반 공통 토글 스위치.
+포커스·키보드·폼 연동은 네이티브 동작을 그대로 사용합니다.
+내부 스타일은 Tailwind 없이 `Switch.module.scss` + `--m2m-*` 토큰으로만 구성됩니다.
+
+```tsx
+import Switch from 'm2m-uiux-react/Switch'
+;<Switch label="알림 받기" checked={on} onChange={(e) => setOn(e.target.checked)} />
+```
+
+## Props
+
+| Prop    | Type                   | Default | 설명                   |
+| ------- | ---------------------- | ------- | ---------------------- |
+| `label` | `ReactNode`            | —       | 라벨 텍스트/노드       |
+| `size`  | `'sm' \| 'md' \| 'lg'` | `'md'`  | 크기                   |
+| `error` | `boolean`              | `false` | 에러(유효성 실패) 상태 |
+
+그 외 `<input>` 의 표준 속성(`checked`, `defaultChecked`, `disabled`, `name`, `value`, `onChange` …)을 전달할 수 있습니다.
+`ref` 는 `<input>` 엘리먼트로 전달됩니다.
+
+## 상수
+
+`Switch.constant.ts` 에서 export: `SWITCH_SIZE`, `SWITCH_STATE_CLASS`(`{ IS_CHECKED, IS_DISABLED, IS_ERROR }`), `SWITCH_DEFAULT`.

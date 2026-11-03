@@ -1,0 +1,270 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier 클래스명 (단일 소스) ──────────────────────────
+$IS_SELECTED: 'is-selected';
+
+// bottom drawer(size=full) — 상단에 15px 여백을 남겨 배경이 살짝 보이는 플로팅 시트로.
+// direction=bottom 기본 border-radius(위쪽 둥근 모서리)는 그대로 유지.
+.bsRegionPickerPanel {
+  width: 100%;
+  max-width: 100%;
+  height: calc(100vh - #{rem(150px)});
+  max-height: calc(100vh - #{rem(15px)});
+}
+
+.bsRegionPickerPanel .bsDialogBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.bsRegionPickerPanel .bsDialogDescription {
+  @include text-ellipsis(1);
+}
+
+.bsRegionPickerPanel .bsDialogFooter {
+  padding: rem(12px) rem(16px) calc(env(safe-area-inset-bottom, 0px) + #{rem(12px)});
+}
+
+// ── 헤더(제목 슬롯) 내부 — 뒤로가기 + 제목 ────────────────
+.bsRegionPickerTitleRow {
+  display: flex;
+  align-items: center;
+  gap: rem(6px);
+}
+
+.bsRegionPickerBack {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: rem(28px);
+  height: rem(28px);
+  margin-left: rem(-6px);
+  border: 0;
+  background: none;
+  color: var(--m2m-pg-comp-text);
+  cursor: pointer;
+}
+
+// ── 2단 컬럼 ─────────────────────────────
+.bsRegionPickerColumns {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: 1fr 1fr;
+}
+
+.bsRegionPickerColumn {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & + & {
+    border-left: rem(1px) dashed var(--m2m-pg-comp-border-sub);
+  }
+}
+
+.bsRegionPickerColumnHead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  flex-shrink: 0;
+  padding: rem(10px) rem(16px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Caption/Semibold');
+}
+
+.bsRegionPickerList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bsRegionPickerItem {
+  display: flex;
+  align-items: center;
+  gap: rem(6px);
+  width: 100%;
+  padding: rem(12px) rem(16px);
+  border: 0;
+  background: none;
+  color: var(--m2m-pg-comp-text-sub);
+  text-align: left;
+  cursor: pointer;
+  @include typo('Body/Regular');
+
+  &:hover {
+    background-color: var(--m2m-pg-comp-bg-hover);
+  }
+}
+
+.#{$IS_SELECTED} {
+  background-color: var(--m2m-pg-brand-light);
+  color: var(--m2m-pg-brand);
+  @include typo('Body/Semibold');
+}
+
+// 다중 선택 시 시/도 목록에서 "이 시/도 안에 선택된 시군구 개수"를 알려주는 뱃지
+.bsRegionPickerCount {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--m2m-pg-brand);
+  @include typo('Caption/Semibold');
+}
+
+// 다중 선택 시 시군구 목록 각 항목의 체크박스
+.bsRegionPickerCheckbox {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: rem(18px);
+  height: rem(18px);
+  border: rem(1.5px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(4px);
+  background-color: var(--m2m-pg-comp-bg);
+
+  &.#{$IS_SELECTED} {
+    border-color: var(--m2m-pg-brand);
+    background-color: var(--m2m-pg-brand);
+  }
+}
+
+.bsRegionPickerEmpty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: rem(8px);
+  padding: rem(24px) rem(16px);
+  color: var(--m2m-pg-comp-text-disabled);
+  text-align: center;
+  @include typo('Sub/Regular');
+}
+
+// ── 하단 확정 버튼 (단일 선택 — 전체 너비) ─
+.bsRegionPickerConfirmFull {
+  flex: 1;
+  padding: rem(14px);
+  border: 0;
+  border-radius: rem(10px);
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+  cursor: pointer;
+  @include typo('Body/Semibold');
+
+  &:hover:not(:disabled) {
+    background-color: var(--m2m-pg-brand-hover);
+  }
+
+  &:disabled {
+    background-color: var(--m2m-pg-comp-bg-disabled);
+    color: var(--m2m-pg-comp-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+// ── 하단 영역 (다중 선택) — 선택 칩 목록 + 초기화/적용 액션 ─
+.bsRegionPickerMultiFooter {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: rem(10px);
+  min-width: 0;
+}
+
+.bsRegionPickerChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(6px);
+  max-height: rem(76px);
+  overflow-y: auto;
+}
+
+.bsRegionPickerChip {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(4px);
+  padding: rem(6px) rem(6px) rem(6px) rem(10px);
+  border-radius: rem(999px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Caption/Medium');
+}
+
+.bsRegionPickerChipRemove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(16px);
+  height: rem(16px);
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--m2m-pg-comp-text-muted);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--m2m-pg-comp-bg-hover);
+    color: var(--m2m-pg-comp-text);
+  }
+}
+
+.bsRegionPickerActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(12px);
+}
+
+.bsRegionPickerReset {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: rem(4px);
+  padding: rem(8px) rem(4px);
+  border: 0;
+  background: none;
+  color: var(--m2m-pg-comp-text-muted);
+  cursor: pointer;
+  @include typo('Body/Medium');
+
+  &:hover {
+    color: var(--m2m-pg-comp-text-sub);
+  }
+}
+
+.bsRegionPickerConfirm {
+  flex-shrink: 0;
+  padding: rem(12px) rem(24px);
+  border: 0;
+  border-radius: rem(10px);
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+  cursor: pointer;
+  @include typo('Body/Semibold');
+
+  &:hover:not(:disabled) {
+    background-color: var(--m2m-pg-brand-hover);
+  }
+
+  &:disabled {
+    background-color: var(--m2m-pg-comp-bg-disabled);
+    color: var(--m2m-pg-comp-text-disabled);
+    cursor: not-allowed;
+  }
+}

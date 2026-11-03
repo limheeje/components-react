@@ -1,0 +1,50 @@
+@use '~/assets/styles/theme' as *;
+
+.bsNoData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: rem(8px);
+  min-width: rem(260px);
+  padding: rem(32px) rem(20px);
+  border: rem(1px) dashed var(--m2m-pg-comp-border);
+  border-radius: rem(10px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  text-align: center;
+}
+
+.bsNoDataIcon {
+  display: inline-flex;
+  margin-bottom: rem(4px);
+  color: var(--m2m-pg-comp-text-disabled);
+}
+
+.bsNoDataTitle {
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Head/Semibold');
+}
+
+.bsNoDataDescription {
+  color: var(--m2m-pg-comp-text-disabled);
+  @include typo('Sub/Regular');
+}
+
+.bsNoDataAction {
+  margin-top: rem(8px);
+}
+
+.bsNoDataRetry {
+  padding: rem(7px) rem(18px);
+  border: rem(1px) solid var(--m2m-pg-comp-border-sub);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  font: inherit;
+  cursor: pointer;
+  @include typo('Body/Regular');
+
+  &:hover {
+    background-color: var(--m2m-pg-comp-bg-hover);
+  }
+}

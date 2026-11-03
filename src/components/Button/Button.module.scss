@@ -1,0 +1,208 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$SIZE_SM: 'bsButtonSizeSm';
+$SIZE_MD: 'bsButtonSizeMd';
+$SIZE_LG: 'bsButtonSizeLg';
+$VARIANT_PRIMARY: 'bsButtonVariantPrimary';
+$VARIANT_SECONDARY: 'bsButtonVariantSecondary';
+$VARIANT_GHOST: 'bsButtonVariantGhost';
+$VARIANT_EMPHASIS: 'bsButtonVariantEmphasis';
+$VARIANT_INACTIVE: 'bsButtonVariantInactive';
+$VARIANT_NONE: 'bsButtonVariantNone';
+$IS_ROUND: 'is-round';
+$IS_FULL_WIDTH: 'is-full-width';
+$IS_LOADING: 'is-loading';
+
+.bsButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(6px);
+  border: rem(1px) solid transparent;
+  border-radius: rem(8px);
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: rem(2px) solid var(--m2m-pg-brand);
+    outline-offset: rem(2px);
+  }
+}
+
+.bsButtonLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(6px);
+}
+
+/* ── size ─────────────────────────────────
+   높이(테두리 rem(1px) 양쪽 포함)를 Input/Select 와 동일하게: sm 31 · md 40 · lg 50.
+   가로 패딩은 버튼 특성상 더 넓게 유지. */
+.#{$SIZE_SM} {
+  padding: rem(6px) rem(14px);
+  @include typo('Sub/Semibold');
+}
+
+.#{$SIZE_MD} {
+  padding: rem(9px) rem(20px);
+  @include typo('Head/Semibold');
+}
+
+.#{$SIZE_LG} {
+  padding: rem(12px) rem(28px);
+  @include typo('Title3/Semibold');
+}
+
+/* ── variant ──────────────────────────── */
+.#{$VARIANT_PRIMARY} {
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background-color: var(--m2m-pg-brand-hover);
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--m2m-pg-brand-active);
+  }
+}
+
+.#{$VARIANT_SECONDARY} {
+  background-color: var(--m2m-pg-secondary-bg);
+  color: var(--m2m-pg-secondary-text);
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+.#{$VARIANT_GHOST} {
+  background-color: var(--m2m-pg-comp-bg);
+  border-color: var(--m2m-pg-comp-border-sub);
+  color: var(--m2m-pg-comp-text);
+
+  &:hover:not(:disabled) {
+    background-color: var(--m2m-pg-comp-bg-hover);
+  }
+}
+
+.#{$VARIANT_EMPHASIS} {
+  background-color: var(--m2m-pg-brand-hover);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background-color: var(--m2m-pg-brand-active);
+  }
+}
+
+.#{$VARIANT_INACTIVE} {
+  background-color: var(--m2m-pg-comp-text-disabled);
+  color: #fff;
+}
+
+.#{$VARIANT_NONE} {
+  padding-left: rem(4px);
+  padding-right: rem(4px);
+  background-color: transparent;
+  color: var(--m2m-pg-comp-text-sub);
+  text-decoration: underline;
+  text-underline-offset: rem(3px);
+
+  &:hover:not(:disabled) {
+    color: var(--m2m-pg-comp-text);
+  }
+}
+
+/* ── variant: 상태 색상 (Badge type 과 동일 팔레트) ── */
+@mixin button-color($name, $token, $dark, $light: false, $bg: $token + '-bg') {
+  .bsButtonVariant#{$name} {
+    &:disabled:not(.#{$IS_LOADING}) {
+      opacity: 0.5;
+    }
+
+    @if $light {
+      background-color: var(--m2m-pg-#{$bg});
+      border-color: var(--m2m-pg-#{$token}-border);
+      color: var(--m2m-pg-#{$dark});
+
+      &:hover:not(:disabled),
+      &:active:not(:disabled) {
+        background-color: var(--m2m-pg-#{$token}-border);
+        opacity: 1;
+      }
+    } @else {
+      background-color: var(--m2m-pg-#{$token});
+      border-color: transparent;
+      color: #fff;
+
+      &:hover:not(:disabled),
+      &:active:not(:disabled) {
+        background-color: var(--m2m-pg-#{$dark});
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@include button-color('Success', 'success', 'success-dark');
+@include button-color('Warning', 'warning', 'warning-dark');
+@include button-color('Danger', 'error', 'error-dark');
+@include button-color('Info', 'info-dark', 'brand-active');
+@include button-color('PrimaryLight', 'brand', 'brand', true, 'brand-light');
+@include button-color('SuccessLight', 'success', 'success', true);
+@include button-color('WarningLight', 'warning', 'warning-dark', true);
+@include button-color('DangerLight', 'error', 'error-dark', true);
+@include button-color('InfoLight', 'info', 'info-dark', true);
+
+/* ── state ────────────────────────────── */
+.bsButton.#{$IS_ROUND} {
+  border-radius: rem(999px);
+}
+
+.bsButton.#{$IS_FULL_WIDTH} {
+  width: 100%;
+}
+
+.bsButton.#{$IS_LOADING} {
+  opacity: 0.85;
+
+  .bsButtonLabel {
+    opacity: 0.7;
+  }
+}
+
+.#{$VARIANT_PRIMARY},
+.#{$VARIANT_SECONDARY},
+.#{$VARIANT_GHOST},
+.#{$VARIANT_EMPHASIS} {
+  &:disabled:not(.#{$IS_LOADING}) {
+    opacity: 0.5;
+  }
+}
+
+/* ── spinner ──────────────────────────── */
+.bsButtonSpinner {
+  width: 1em;
+  height: 1em;
+  border: rem(2px) solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: bsButtonSpin 0.7s linear infinite;
+}
+
+@keyframes bsButtonSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

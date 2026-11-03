@@ -1,0 +1,133 @@
+// =============================================================================
+// 타이포그래피 토큰 (name → (font-size, line-height, font-weight))
+// 이름 = Title / Body / Sub / Caption / Micro + 굵기(Bold 700 / Semibold 600 / Medium 500 / Regular 400).
+// =============================================================================
+
+$font-family:
+  'Pretendard',
+  -apple-system,
+  'Apple SD Gothic Neo',
+  sans-serif;
+
+$typo-map: (
+  'Title1/Bold': (
+    22px,
+    30px,
+    700
+  ),
+  'Title2/Bold': (
+    18px,
+    26px,
+    700
+  ),
+  'Title3/Semibold': (
+    16px,
+    24px,
+    600
+  ),
+  'Title3/Medium': (
+    16px,
+    24px,
+    500
+  ),
+  'Title3/Regular': (
+    16px,
+    24px,
+    400
+  ),
+  'Head/Bold': (
+    14px,
+    20px,
+    700
+  ),
+  'Head/Semibold': (
+    14px,
+    20px,
+    600
+  ),
+  'Head/Medium': (
+    14px,
+    20px,
+    500
+  ),
+  'Head/Regular': (
+    14px,
+    20px,
+    400
+  ),
+  'Body/Bold': (
+    13px,
+    19px,
+    700
+  ),
+  'Body/Semibold': (
+    13px,
+    19px,
+    600
+  ),
+  'Body/Medium': (
+    13px,
+    19px,
+    500
+  ),
+  'Body/Regular': (
+    13px,
+    19px,
+    400
+  ),
+  'Sub/Bold': (
+    12px,
+    17px,
+    700
+  ),
+  'Sub/Semibold': (
+    12px,
+    17px,
+    600
+  ),
+  'Sub/Medium': (
+    12px,
+    17px,
+    500
+  ),
+  'Sub/Regular': (
+    12px,
+    17px,
+    400
+  ),
+  'Caption/Bold': (
+    11px,
+    15px,
+    700
+  ),
+  'Caption/Semibold': (
+    11px,
+    15px,
+    600
+  ),
+  'Caption/Medium': (
+    11px,
+    15px,
+    500
+  ),
+  'Caption/Regular': (
+    11px,
+    15px,
+    400
+  ),
+  'Micro/Bold': (
+    10px,
+    14px,
+    700
+  ),
+  'Micro/Medium': (
+    10px,
+    14px,
+    500
+  ),
+  'Micro/Regular': (
+    10px,
+    14px,
+    400
+  )
+);

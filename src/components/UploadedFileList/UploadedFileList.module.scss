@@ -1,0 +1,81 @@
+@use '~/assets/styles/theme' as *;
+
+.bsUploadedFileList {
+  display: flex;
+  flex-direction: column;
+  gap: rem(6px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.bsUploadedFileItem {
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  padding: rem(8px) rem(12px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  background: var(--m2m-pg-comp-bg-subtle);
+}
+.is-error {
+  border-color: var(--m2m-pg-error);
+  background: var(--m2m-pg-error-bg);
+}
+.bsUploadedFileThumb {
+  width: rem(36px);
+  height: rem(36px);
+  object-fit: cover;
+  border-radius: rem(4px);
+  flex-shrink: 0;
+  background: var(--m2m-pg-comp-bg);
+}
+.is-previewable {
+  cursor: zoom-in;
+}
+.bsUploadedFileIcon {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-muted);
+}
+.bsUploadedFileInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: rem(2px);
+}
+.bsUploadedFileName {
+  @include text-ellipsis(1);
+  color: var(--m2m-pg-comp-text);
+  @include typo('Body/Regular');
+}
+.bsUploadedFileMeta {
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Caption/Regular');
+}
+.is-error .bsUploadedFileMeta {
+  color: var(--m2m-pg-error);
+}
+.bsUploadedFileStatusDone {
+  flex-shrink: 0;
+  color: var(--m2m-pg-success);
+}
+.bsUploadedFileStatusUploading {
+  flex-shrink: 0;
+  color: var(--m2m-pg-brand);
+}
+.bsUploadedFileStatusError {
+  flex-shrink: 0;
+  color: var(--m2m-pg-error);
+}
+.bsUploadedFileRemove {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: rem(2px);
+  border: 0;
+  background: none;
+  color: var(--m2m-pg-comp-text-muted);
+  cursor: pointer;
+}
+.bsUploadedFileRemove:hover {
+  color: var(--m2m-pg-comp-text);
+}

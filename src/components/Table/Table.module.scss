@@ -1,0 +1,162 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_HOVER: 'is-hover';
+$IS_LOADING: 'is-loading';
+$IS_STRIPED: 'is-striped';
+$SIZE_SM: 'bsTableSizeSm';
+
+.bsTable {
+  position: relative;
+  width: 100%;
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  overflow: hidden;
+}
+
+.bsTableScroll {
+  overflow-x: auto;
+}
+
+.bsTableMain {
+  width: 100%;
+  border-collapse: collapse;
+  @include typo('Body/Regular');
+}
+
+.bsTableTh {
+  padding: rem(9px) rem(12px);
+  text-align: left;
+  white-space: nowrap;
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  border-bottom: rem(2px) solid var(--m2m-pg-comp-border);
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Body/Semibold');
+}
+
+.bsTableSortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.bsTableThInner {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(4px);
+}
+
+.bsTableSortIcon {
+  color: var(--m2m-pg-comp-border-sub);
+}
+.bsTableSortable[aria-sort] .bsTableSortIcon {
+  color: var(--m2m-pg-brand);
+}
+
+.bsTableTr {
+  border-bottom: rem(1px) solid var(--m2m-pg-comp-border);
+  background-color: var(--m2m-pg-comp-bg);
+}
+
+.bsTableTd {
+  padding: rem(9px) rem(12px);
+  color: var(--m2m-pg-comp-text);
+}
+
+.bsTableSpanCell {
+  vertical-align: middle;
+}
+
+.bsTableMessageCell {
+  padding: rem(40px) rem(12px);
+  text-align: center;
+  color: var(--m2m-pg-comp-text-disabled);
+}
+
+/* ── modifiers ─────────────────────────── */
+.#{$IS_STRIPED} .bsTableTr:nth-child(even) {
+  background-color: var(--m2m-pg-comp-bg-subtle);
+}
+
+.#{$IS_HOVER} .bsTableTr:hover {
+  background-color: var(--m2m-pg-comp-bg-hover);
+}
+
+.bsTableSelected {
+  background-color: var(--m2m-pg-brand-light) !important;
+}
+
+.#{$IS_LOADING} .bsTableScroll {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  .bsTableTh,
+  .bsTableTd {
+    padding: rem(6px) rem(10px);
+    @include typo('Sub/Regular');
+  }
+  .bsTableTh {
+    @include typo('Sub/Semibold');
+  }
+}
+
+/* ── pagination ───────────────────────── */
+.bsTablePagination {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8px);
+  padding: rem(10px) rem(12px);
+  background-color: var(--m2m-pg-comp-bg);
+}
+
+.bsTableTotal {
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Sub/Regular');
+}
+
+.bsTablePager {
+  display: flex;
+  align-items: center;
+  gap: rem(4px);
+}
+
+.bsTablePagerAlignLeft {
+  justify-content: flex-start;
+}
+
+.bsTablePagerAlignCenter {
+  justify-content: center;
+}
+
+.bsTablePagerAlignRight {
+  justify-content: flex-end;
+}
+
+.bsTablePageButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: rem(28px);
+  height: rem(28px);
+  padding: 0 rem(8px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(4px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text-sub);
+  cursor: pointer;
+  @include typo('Sub/Regular');
+
+  &:disabled {
+    color: var(--m2m-pg-comp-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.bsTablePageActive {
+  background-color: var(--m2m-pg-brand);
+  border-color: var(--m2m-pg-brand);
+  color: #fff;
+  font-weight: 600;
+}

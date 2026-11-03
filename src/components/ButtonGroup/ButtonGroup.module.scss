@@ -1,0 +1,51 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$DIRECTION_COLUMN: 'bsButtonGroupDirectionColumn';
+$DIRECTION_ROW: 'bsButtonGroupDirectionRow';
+$IS_ATTACHED: 'is-attached';
+$IS_DISABLED: 'is-disabled';
+
+.bsButtonGroup {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.#{$DIRECTION_ROW} {
+  flex-direction: row;
+  gap: rem(8px);
+}
+
+.#{$DIRECTION_COLUMN} {
+  flex-direction: column;
+  gap: rem(6px);
+}
+
+/* ── attached: 여백 제거 + 경계 버튼만 라운드 유지 ── */
+.#{$IS_ATTACHED} {
+  gap: 0;
+}
+
+.#{$IS_ATTACHED}.#{$DIRECTION_ROW} > :not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: rem(1px) solid rgb(255 255 255 / 20%);
+}
+.#{$IS_ATTACHED}.#{$DIRECTION_ROW} > :not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.#{$IS_ATTACHED}.#{$DIRECTION_COLUMN} > :not(:first-child) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: rem(1px) solid rgb(255 255 255 / 20%);
+}
+.#{$IS_ATTACHED}.#{$DIRECTION_COLUMN} > :not(:last-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.#{$IS_DISABLED} {
+  cursor: not-allowed;
+}

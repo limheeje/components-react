@@ -1,0 +1,247 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$COLOR_NEUTRAL: 'bsLoadingColorNeutral';
+$COLOR_PRIMARY: 'bsLoadingColorPrimary';
+$COLOR_WHITE: 'bsLoadingColorWhite';
+$IS_OVERLAY: 'is-overlay';
+$SIZE_LG: 'bsLoadingSizeLg';
+$SIZE_MD: 'bsLoadingSizeMd';
+$SIZE_SM: 'bsLoadingSizeSm';
+
+.bsLoading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.#{$IS_OVERLAY} {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(1px);
+}
+
+.bsLoadingInner {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(10px);
+}
+
+/* ── spinner ──────────────────────────── */
+.bsLoadingSpinner {
+  display: block;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: currentColor;
+  border-top-color: transparent;
+  animation: bsLoadingLoadingSpin 0.75s linear infinite;
+}
+
+@keyframes bsLoadingLoadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── dots ─────────────────────────────── */
+.bsLoadingDots {
+  display: inline-flex;
+  align-items: center;
+
+  span {
+    display: block;
+    border-radius: 50%;
+    background-color: currentColor;
+    animation: bsLoadingLoadingBounce 1.3s ease-in-out infinite;
+  }
+
+  span:nth-child(2) {
+    animation-delay: 0.22s;
+  }
+  span:nth-child(3) {
+    animation-delay: 0.44s;
+  }
+}
+
+@keyframes bsLoadingLoadingBounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+    opacity: 0.35;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── skeleton ─────────────────────────── */
+.bsLoadingSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8px);
+  width: rem(280px);
+  max-width: 100%;
+}
+
+.bsLoadingSkeletonHead {
+  display: flex;
+  gap: rem(12px);
+  margin-bottom: rem(6px);
+}
+
+.bsLoadingSkeletonLines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: rem(8px);
+  padding-top: rem(4px);
+}
+
+.bsLoadingSkeletonBody {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8px);
+}
+
+.bsLoadingSkeletonBox {
+  height: rem(12px);
+  border-radius: rem(6px);
+  background-color: var(--m2m-pg-skeleton-base);
+  background-image: linear-gradient(
+    90deg,
+    var(--m2m-pg-skeleton-base) 25%,
+    var(--m2m-pg-skeleton-shine) 50%,
+    var(--m2m-pg-skeleton-base) 75%
+  );
+  background-size: rem(600px) 100%;
+  animation: bsLoadingSkeletonShimmer 1.5s ease-in-out infinite;
+}
+
+.bsLoadingSkeletonAvatar {
+  width: rem(40px);
+  height: rem(40px);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bsLoadingSkeletonHead .bsLoadingSkeletonBox {
+  height: rem(14px);
+}
+.bsLoadingSkeletonLines .bsLoadingSkeletonBox:nth-child(1) {
+  width: 65%;
+}
+.bsLoadingSkeletonLines .bsLoadingSkeletonBox:nth-child(2) {
+  width: 40%;
+  height: rem(11px);
+}
+.bsLoadingSkeletonBody .bsLoadingSkeletonBox:last-child {
+  width: 70%;
+}
+
+@keyframes bsLoadingSkeletonShimmer {
+  from {
+    background-position: rem(-600px) 0;
+  }
+  to {
+    background-position: rem(600px) 0;
+  }
+}
+
+/* ── color ────────────────────────────── */
+.#{$COLOR_PRIMARY} {
+  color: var(--m2m-pg-brand);
+}
+.#{$COLOR_NEUTRAL} {
+  color: var(--m2m-pg-comp-text-disabled);
+}
+.#{$COLOR_WHITE} {
+  color: #fff;
+}
+
+.bsLoadingText {
+  color: var(--m2m-pg-comp-text-muted);
+}
+.#{$COLOR_WHITE} .bsLoadingText {
+  color: #fff;
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  .bsLoadingSpinner {
+    width: rem(20px);
+    height: rem(20px);
+    border-width: rem(2.5px);
+  }
+  .bsLoadingDots {
+    gap: rem(5px);
+    span {
+      width: rem(7px);
+      height: rem(7px);
+    }
+  }
+  .bsLoadingText {
+    @include typo('Caption/Regular');
+  }
+  &.bsLoadingSkeleton {
+    width: rem(224px);
+  }
+  .bsLoadingSkeletonAvatar {
+    width: rem(32px);
+    height: rem(32px);
+  }
+  .bsLoadingSkeletonBox {
+    height: rem(10px);
+  }
+}
+
+.#{$SIZE_MD} {
+  .bsLoadingSpinner {
+    width: rem(32px);
+    height: rem(32px);
+    border-width: rem(4px);
+  }
+  .bsLoadingDots {
+    gap: rem(8px);
+    span {
+      width: rem(11px);
+      height: rem(11px);
+    }
+  }
+  .bsLoadingText {
+    @include typo('Body/Regular');
+  }
+}
+
+.#{$SIZE_LG} {
+  .bsLoadingSpinner {
+    width: rem(48px);
+    height: rem(48px);
+    border-width: rem(6px);
+  }
+  .bsLoadingDots {
+    gap: rem(11px);
+    span {
+      width: rem(16px);
+      height: rem(16px);
+    }
+  }
+  .bsLoadingText {
+    @include typo('Head/Regular');
+  }
+  &.bsLoadingSkeleton {
+    width: rem(350px);
+  }
+  .bsLoadingSkeletonAvatar {
+    width: rem(50px);
+    height: rem(50px);
+  }
+  .bsLoadingSkeletonBox {
+    height: rem(15px);
+  }
+}

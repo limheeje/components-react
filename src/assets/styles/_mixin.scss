@@ -1,0 +1,61 @@
+// =============================================================================
+// SCSS 믹스인
+// =============================================================================
+@use 'sass:map';
+@use 'sass:list';
+@use 'function' as *;
+@use 'typography' as *;
+@use 'icons' as *;
+
+// 배경 아이콘: mask + background-color 로 색을 입힌다. (SVG 자체 fill 무시)
+@mixin get-background-svg($type, $color) {
+  $svg: map.get(icon-map(), $type);
+  $svg: str-replace($svg, '#', '%23');
+  $svg: str-replace($svg, '<', '%3C');
+  $svg: str-replace($svg, '>', '%3E');
+  $svg: str-replace($svg, '"', '%22');
+  $svg: str-replace($svg, ' ', '%20');
+  $url: url('data:image/svg+xml;utf8,#{$svg}');
+  background-color: $color;
+  mask: $url no-repeat center / contain;
+  -webkit-mask: $url no-repeat center / contain;
+}
+
+// 타이포그래피 토큰 적용. 예) @include typo('Body/Regular');
+@mixin typo($name) {
+  @if not map.has-key($typo-map, $name) {
+    @warn "typo(): 정의되지 않은 토큰 '#{$name}'";
+  } @else {
+    $t: map.get($typo-map, $name);
+    font-family: $font-family;
+    font-size: rem(list.nth($t, 1));
+    line-height: rem(list.nth($t, 2));
+    font-weight: list.nth($t, 3);
+  }
+}
+
+// 스크린리더 전용 숨김
+@mixin hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+
+// 말줄임
+@mixin text-ellipsis($lines: 1, $line-height: 1.4em) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @if $lines == 1 {
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    max-height: calc($line-height * $lines);
+  }
+}

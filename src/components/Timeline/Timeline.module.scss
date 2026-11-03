@@ -1,0 +1,210 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$ALIGN_ALTERNATE: 'bsTimelineAlignAlternate';
+$ALIGN_RIGHT: 'bsTimelineAlignRight';
+$COLOR_GRAY: 'bsTimelineColorGray';
+$COLOR_SUCCESS: 'bsTimelineColorSuccess';
+$DIRECTION_HORIZONTAL: 'bsTimelineDirectionHorizontal';
+$DIRECTION_VERTICAL: 'bsTimelineDirectionVertical';
+$NODE_FILLED: 'bsTimelineNodeFilled';
+$SIDE_A: 'bsTimelineSideA';
+$SIDE_B: 'bsTimelineSideB';
+$STATUS_DEFAULT: 'bsTimelineStatusDefault';
+$STATUS_ERROR: 'bsTimelineStatusError';
+$STATUS_GRAY: 'bsTimelineStatusGray';
+$STATUS_PROCESSING: 'bsTimelineStatusProcessing';
+$STATUS_SUCCESS: 'bsTimelineStatusSuccess';
+$STATUS_WARNING: 'bsTimelineStatusWarning';
+
+@keyframes bsTimelineM2mTimelinePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.bsTimeline {
+  --tl-color: var(--m2m-pg-brand);
+
+  &.#{$COLOR_SUCCESS} {
+    --tl-color: var(--m2m-pg-success);
+  }
+  &.#{$COLOR_GRAY} {
+    --tl-color: var(--m2m-pg-comp-text-disabled);
+  }
+}
+
+/* ── 노드 ──────────────────────────────── */
+.bsTimelineNode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(22px);
+  height: rem(22px);
+  border-radius: 50%;
+  border: rem(2.5px) solid var(--tl-color);
+  background-color: var(--m2m-pg-comp-bg);
+  color: #fff;
+  flex-shrink: 0;
+  z-index: 1;
+  box-shadow: 0 0 0 rem(3px) color-mix(in srgb, var(--tl-color) 13%, transparent);
+}
+.#{$NODE_FILLED} {
+  background-color: var(--tl-color);
+}
+
+.#{$STATUS_DEFAULT} {
+  --tl-color: var(--m2m-pg-brand);
+}
+.#{$STATUS_SUCCESS} {
+  --tl-color: var(--m2m-pg-success);
+}
+.#{$STATUS_WARNING} {
+  --tl-color: var(--m2m-pg-warning);
+}
+.#{$STATUS_ERROR} {
+  --tl-color: var(--m2m-pg-error);
+}
+.#{$STATUS_PROCESSING} {
+  --tl-color: var(--m2m-pg-info);
+}
+.#{$STATUS_GRAY} {
+  --tl-color: var(--m2m-pg-comp-text-disabled);
+}
+
+.bsTimelineLine {
+  flex: 1;
+  background-color: var(--m2m-pg-comp-border);
+}
+
+/* ── 콘텐츠 ────────────────────────────── */
+.bsTimelineContent {
+  padding-bottom: rem(20px);
+}
+.bsTimelineTitle {
+  @include typo('Body/Semibold');
+  color: var(--m2m-pg-comp-text);
+}
+.bsTimelineDesc {
+  margin-top: rem(2px);
+  @include typo('Sub/Regular');
+  color: var(--m2m-pg-comp-text-muted);
+}
+.bsTimelineDate {
+  margin-top: rem(3px);
+  @include typo('Caption/Regular');
+  color: var(--m2m-pg-comp-text-disabled);
+}
+
+/* ── 진행 중 ───────────────────────────── */
+.bsTimelinePendingDot {
+  width: rem(14px);
+  height: rem(14px);
+  border-radius: 50%;
+  border: rem(2px) dashed var(--m2m-pg-comp-border-sub);
+  animation: bsTimelineM2mTimelinePulse 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.bsTimelinePendingText {
+  @include typo('Sub/Regular');
+  color: var(--m2m-pg-comp-text-disabled);
+}
+
+/* ── 세로 (기본) ───────────────────────── */
+.#{$DIRECTION_VERTICAL} {
+  display: flex;
+  flex-direction: column;
+
+  .bsTimelineItem {
+    display: flex;
+    gap: rem(16px);
+  }
+
+  .bsTimelineRail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .bsTimelineLine {
+    width: rem(2px);
+    margin-top: rem(4px);
+    min-height: rem(24px);
+  }
+}
+
+.#{$DIRECTION_VERTICAL}.#{$ALIGN_RIGHT} {
+  .bsTimelineItem {
+    flex-direction: row-reverse;
+  }
+  .bsTimelineContent {
+    text-align: right;
+  }
+}
+
+.#{$DIRECTION_VERTICAL}.#{$ALIGN_ALTERNATE} {
+  .bsTimelineItem {
+    display: grid;
+    grid-template-columns: 1fr rem(28px) 1fr;
+    gap: rem(12px);
+  }
+  .bsTimelineRail {
+    grid-column: 2;
+  }
+  .#{$SIDE_A} .bsTimelineContent {
+    grid-column: 3;
+  }
+  .#{$SIDE_B} .bsTimelineContent {
+    grid-column: 1;
+    text-align: right;
+  }
+  .bsTimelineItemPending .bsTimelineContent {
+    grid-column: 3;
+  }
+}
+
+/* ── 가로 ──────────────────────────────── */
+.#{$DIRECTION_HORIZONTAL} {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: rem(4px);
+
+  .bsTimelineItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: rem(110px);
+    flex-shrink: 0;
+  }
+  .bsTimelineRail {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .bsTimelineLine {
+    display: none;
+  }
+  .bsTimelineItem:not(:last-child) .bsTimelineRail::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: calc(50% + #{rem(16px)});
+    right: calc(-50% + #{rem(16px)});
+    height: rem(2.5px);
+    background-color: var(--m2m-pg-comp-border);
+  }
+  .bsTimelineContent {
+    margin-top: rem(8px);
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .bsTimelineDesc {
+    display: none;
+  }
+}

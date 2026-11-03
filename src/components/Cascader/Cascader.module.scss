@@ -1,0 +1,272 @@
+@use '~/assets/styles/theme' as *;
+
+.bsCascader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: rem(4px);
+  width: 100%;
+  min-width: rem(200px);
+}
+.bsCascaderTrigger {
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+  min-height: rem(40px);
+  padding: rem(8px) rem(10px);
+  border: rem(1.5px) solid var(--m2m-pg-comp-border-sub);
+  border-radius: rem(8px);
+  background: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease;
+  @include typo('Head/Regular');
+}
+.bsCascaderTrigger:focus-visible,
+.is-open {
+  border-color: var(--m2m-pg-brand);
+}
+.is-error {
+  border-color: var(--m2m-pg-error);
+}
+.is-disabled {
+  background: var(--m2m-pg-comp-bg-disabled);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.is-placeholder .bsCascaderLabel {
+  color: var(--m2m-pg-comp-text-disabled);
+}
+.bsCascaderLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bsCascaderTrigger input {
+  flex: 1;
+  min-width: rem(50px);
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+.bsCascaderChevron {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-disabled);
+}
+.is-open .bsCascaderChevron {
+  transform: rotate(180deg);
+}
+.bsCascaderClear {
+  display: none;
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--m2m-pg-comp-text-disabled);
+  cursor: pointer;
+}
+
+.bsCascaderTrigger:hover .bsCascaderClear,
+.bsCascaderClear:focus-visible {
+  display: inline-flex;
+}
+
+.bsCascaderTrigger:has(.bsCascaderClear):hover .bsCascaderChevron {
+  display: none;
+}
+
+@media (hover: none) {
+  .bsCascaderClear {
+    display: inline-flex;
+  }
+
+  .bsCascaderTrigger:has(.bsCascaderClear) .bsCascaderChevron {
+    display: none;
+  }
+}
+.bsCascaderDropdown {
+  position: absolute;
+  top: calc(100% + #{rem(4px)});
+  left: 0;
+  z-index: 100;
+  min-width: 100%;
+  max-width: calc(100vw - #{rem(32px)});
+  overflow-x: auto;
+  border: rem(1.5px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  background: var(--m2m-pg-comp-bg);
+  box-shadow: 0 rem(4px) rem(16px) rgb(0 0 0 / 12%);
+}
+.bsCascaderPanel {
+  display: inline-flex;
+  align-items: stretch;
+  max-width: 100%;
+  overflow-x: auto;
+  border: rem(1.5px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  background: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  outline: none;
+  user-select: none;
+  @include typo('Head/Regular');
+
+  &:focus-visible {
+    border-color: var(--m2m-pg-brand);
+  }
+}
+.bsCascaderDropdown .bsCascaderPanel {
+  display: flex;
+  border: 0;
+  border-radius: 0;
+}
+.bsCascaderMenu {
+  flex-shrink: 0;
+  min-width: rem(160px);
+  max-height: rem(240px);
+  margin: 0;
+  padding: rem(4px) 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.bsCascaderMenu + .bsCascaderMenu {
+  border-left: rem(1px) solid var(--m2m-pg-comp-border);
+}
+.bsCascaderNode,
+.bsCascaderSuggestion {
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+  padding: rem(9px) rem(12px);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+.bsCascaderNode:hover,
+.bsCascaderSuggestion:hover,
+.bsCascaderNodeInPath,
+.bsCascaderNodeFocus,
+.bsCascaderSuggestionActive {
+  background: var(--m2m-pg-comp-bg-subtle);
+}
+.bsCascaderNodeSelected {
+  color: var(--m2m-pg-brand);
+  font-weight: 600;
+  background: var(--m2m-pg-brand-light);
+}
+.bsCascaderSuggestionSelected {
+  color: var(--m2m-pg-brand);
+  background: var(--m2m-pg-brand-light);
+}
+.bsCascaderSuggestionDisabled {
+  color: var(--m2m-pg-comp-text-disabled);
+  background: transparent;
+  cursor: not-allowed;
+}
+.bsCascaderNodeDisabled {
+  color: var(--m2m-pg-comp-text-disabled);
+  font-weight: 400;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+.bsCascaderNodeLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bsCascaderControl {
+  display: inline-flex;
+  flex-shrink: 0;
+  line-height: 0;
+}
+.bsCascaderNodeArrow,
+.bsCascaderNodeCheck {
+  margin-left: auto;
+  color: var(--m2m-pg-brand);
+}
+.bsCascaderSpinner {
+  width: rem(12px);
+  height: rem(12px);
+  border: rem(2px) solid var(--m2m-pg-comp-border);
+  border-top-color: var(--m2m-pg-brand);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.bsCascaderEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(8px);
+  min-width: rem(160px);
+  padding: rem(16px);
+  color: var(--m2m-pg-comp-text-disabled);
+  @include typo('Body/Regular');
+}
+.bsCascaderSuggestions {
+  max-height: rem(240px);
+  margin: 0;
+  padding: rem(4px) 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.bsCascaderTags {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: rem(4px);
+}
+.bsCascaderTag {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(4px);
+  max-width: 100%;
+  padding: rem(2px) rem(7px);
+  border: rem(1px) solid var(--m2m-pg-brand-border);
+  border-radius: rem(4px);
+  background: var(--m2m-pg-brand-light);
+  color: var(--m2m-pg-brand);
+  @include typo('Sub/Regular');
+}
+.bsCascaderTag button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.bsCascaderMeta {
+  @include typo('Caption/Regular');
+  color: var(--m2m-pg-comp-text-muted);
+}
+.bsCascaderError {
+  color: var(--m2m-pg-error);
+}
+.bsCascaderSizeSm .bsCascaderTrigger {
+  min-height: rem(31px);
+  padding: rem(5px) rem(8px);
+  @include typo('Sub/Regular');
+}
+.bsCascaderSizeMd .bsCascaderTrigger {
+  min-height: rem(40px);
+  padding: rem(9px) rem(10px);
+}
+.bsCascaderSizeLg .bsCascaderTrigger {
+  min-height: rem(50px);
+  padding: rem(11px) rem(12px);
+  @include typo('Title3/Regular');
+}
+.bsCascaderTriggerMultiple {
+  height: auto;
+}

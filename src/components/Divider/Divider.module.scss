@@ -1,0 +1,65 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$HAS_LABEL: 'has-label';
+$IS_DASHED: 'is-dashed';
+$IS_VERTICAL: 'is-vertical';
+$LABEL_LEFT: 'bsDividerLabelLeft';
+
+.bsDivider {
+  flex-shrink: 0;
+  border: 0;
+  width: 100%;
+  height: 0;
+  border-top: var(--divider-thickness, #{rem(1px)}) solid var(--divider-color, var(--m2m-pg-comp-border));
+
+  &.#{$IS_DASHED} {
+    border-top-style: dashed;
+  }
+}
+
+/* ── vertical ─────────────────────────── */
+.#{$IS_VERTICAL} {
+  width: 0;
+  height: auto;
+  align-self: stretch;
+  min-height: rem(16px);
+  border-top: 0;
+  border-left: var(--divider-thickness, #{rem(1px)}) solid var(--divider-color, var(--m2m-pg-comp-border));
+
+  &.#{$IS_DASHED} {
+    border-left-style: dashed;
+  }
+}
+
+/* ── labelled (horizontal only) ───────── */
+.#{$HAS_LABEL} {
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  border-top: 0;
+  height: auto;
+  color: var(--m2m-pg-comp-text-disabled);
+  @include typo('Caption/Regular');
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    border-top: var(--divider-thickness, #{rem(1px)}) solid var(--divider-color, var(--m2m-pg-comp-border));
+  }
+
+  &.#{$IS_DASHED}::before,
+  &.#{$IS_DASHED}::after {
+    border-top-style: dashed;
+  }
+
+  &.#{$LABEL_LEFT}::before {
+    display: none;
+  }
+}
+
+.bsDividerLabel {
+  flex-shrink: 0;
+  white-space: nowrap;
+}

@@ -1,0 +1,123 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$SIZE_SM: 'bsSegmentedSizeSm';
+$SIZE_MD: 'bsSegmentedSizeMd';
+$SIZE_LG: 'bsSegmentedSizeLg';
+$IS_BLOCK: 'isBlock';
+$IS_DISABLED: 'is-disabled';
+
+// 회색 트랙 + 흰색 선택 알약. width 는 내용만큼(inline-flex).
+.bsSegmented {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: stretch;
+  gap: rem(2px);
+  padding: rem(3px);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+
+  &.#{$IS_BLOCK} {
+    display: flex;
+    width: 100%;
+
+    .bsSegmentedItem {
+      flex: 1 1 0;
+    }
+  }
+
+  &.#{$IS_DISABLED} {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.bsSegmentedItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 0;
+  border: none;
+  border-radius: rem(6px);
+  background: transparent;
+  color: var(--m2m-pg-comp-text-muted);
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &:hover:not(:disabled):not(.bsSegmentedItemSelected) {
+    color: var(--m2m-pg-comp-text);
+  }
+
+  &:focus-visible {
+    outline: rem(2px) solid var(--m2m-pg-brand);
+    outline-offset: rem(-2px);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.bsSegmentedItemSelected {
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-brand);
+  box-shadow: 0 rem(1px) rem(3px) rgba(0, 0, 0, 0.12);
+}
+
+.bsSegmentedItemLabel {
+  overflow: hidden;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── size — 컨트롤 높이 sm 31 · md 40 · lg 50, Input 필드와 동일.
+   폰트는 Input 스케일에서 각 1px 작게 (sm 12→11 · md 14→13 · lg 16→15). ── */
+.#{$SIZE_SM} {
+  height: rem(31px);
+
+  .bsSegmentedItem {
+    padding: 0 rem(10px);
+    @include typo('Sub/Regular');
+    font-size: rem(11px);
+  }
+  .bsSegmentedItemSelected {
+    @include typo('Sub/Semibold');
+    font-size: rem(11px);
+  }
+}
+
+.#{$SIZE_MD} {
+  height: rem(40px);
+
+  .bsSegmentedItem {
+    padding: 0 rem(14px);
+    @include typo('Head/Regular');
+    font-size: rem(13px);
+  }
+  .bsSegmentedItemSelected {
+    @include typo('Head/Semibold');
+    font-size: rem(13px);
+  }
+}
+
+.#{$SIZE_LG} {
+  height: rem(50px);
+
+  .bsSegmentedItem {
+    padding: 0 rem(18px);
+    @include typo('Title3/Regular');
+    font-size: rem(15px);
+  }
+  .bsSegmentedItemSelected {
+    @include typo('Title3/Semibold');
+    font-size: rem(15px);
+  }
+}

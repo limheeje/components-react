@@ -1,0 +1,44 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_PREVIEWABLE: 'is-previewable';
+
+.bsImagePreview {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  line-height: 0;
+  background-color: var(--m2m-pg-comp-bg-subtle);
+}
+
+.#{$IS_PREVIEWABLE} {
+  cursor: zoom-in;
+}
+
+.bsImagePreviewImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.#{$IS_PREVIEWABLE}:hover .bsImagePreviewImg {
+  transform: scale(1.05);
+}
+
+.bsImagePreviewOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0 0 0 / 35%);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.#{$IS_PREVIEWABLE}:hover .bsImagePreviewOverlay,
+.#{$IS_PREVIEWABLE}:focus-visible .bsImagePreviewOverlay {
+  opacity: 1;
+}

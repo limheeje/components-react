@@ -1,0 +1,56 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_CLICKABLE: 'is-clickable';
+
+.bsListItemItem {
+  display: flex;
+  align-items: center;
+  gap: rem(12px);
+  padding: rem(12px) rem(16px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  transition: background-color 0.15s ease;
+
+  &.#{$IS_CLICKABLE} {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--m2m-pg-comp-bg-subtle);
+    }
+  }
+}
+
+.bsListItemAvatar {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.bsListItemBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bsListItemTitle {
+  color: var(--m2m-pg-comp-text);
+  font-weight: 500;
+  @include typo('Head/Regular');
+}
+
+.bsListItemDescription {
+  margin-top: rem(2px);
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Sub/Regular');
+}
+
+.bsListItemExtra {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.bsListItemChevron {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-disabled);
+}

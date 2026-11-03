@@ -1,0 +1,198 @@
+/* =============================================================================
+ * 디자인 토큰 — 수기 관리(hand-authored) CSS.
+ *
+ * 이 파일이 모든 --m2m-* 기본값의 단일 소스다. 값 조정은 여기서 직접 한다.
+ * 각 컴포넌트 index.ts 의 `import '~/assets/styles/tokens.css';` 로 dist/style.css 에 인라인된다.
+ * 소비 앱은 자기 :root / [data-theme] 에서 원하는 변수만 재선언하면 덮어쓴다.
+ *
+ * 브랜드: #023894 (딥 네이비) · 세컨더리: #008cd6 (스카이 블루)
+ * ========================================================================== */
+
+:root {
+  /* rem() 스케일 기준 — 이 값을 바꾸면 rem() 으로 감싼 모든 치수가 비례 스케일된다 */
+  --m2m-font-size: 16px;
+
+  /* 브랜드(딥 네이비 #023894) */
+  --m2m-pg-brand: #023894;
+  --m2m-pg-brand-hover: #0a47ad;
+  --m2m-pg-brand-active: #01285f;
+  --m2m-pg-brand-light: #eef3fb;
+  --m2m-pg-brand-sub: #d9e4f5;
+  --m2m-pg-brand-border: #a8c0e6;
+
+  /* 페이지/표면 (데모·레이아웃용) */
+  --m2m-pg-bg-page: #f6f8fb;
+  --m2m-pg-bg-card: #ffffff;
+  --m2m-pg-bg-subtle: #eef1f6;
+  --m2m-pg-bg-header: #eef1f6;
+  --m2m-pg-bg-code: #eef1f6;
+  --m2m-pg-border: #dde2ec;
+  --m2m-pg-border-sub: #c3cbdb;
+  --m2m-pg-text-primary: #14213d;
+  --m2m-pg-text-sub: #414a63;
+  --m2m-pg-text-muted: #667089;
+  --m2m-pg-text-placeholder: #99a2ba;
+  --m2m-pg-text-code: #0272ab;
+  --m2m-pg-sidebar-shadow: 2px 0 12px rgba(2, 22, 59, 0.06);
+  --m2m-pg-badge-bg: #eef3fb;
+  --m2m-pg-badge-color: #023894;
+  --m2m-pg-badge-border: #a8c0e6;
+
+  /* 상태 — 각 상태는 -bg / -border / -dark 변형이 있다 (info 는 세컨더리 스카이톤) */
+  --m2m-pg-success: #16a34a;
+  --m2m-pg-success-dark: #15803d;
+  --m2m-pg-success-bg: #f0fdf4;
+  --m2m-pg-success-border: #86efac;
+  --m2m-pg-error: #ef4444;
+  --m2m-pg-error-dark: #dc2626;
+  --m2m-pg-error-bg: #fef2f2;
+  --m2m-pg-error-border: #fca5a5;
+  --m2m-pg-warning: #f59e0b;
+  --m2m-pg-warning-dark: #d97706;
+  --m2m-pg-warning-bg: #fffbeb;
+  --m2m-pg-warning-border: #fde68a;
+  --m2m-pg-info: #008cd6;
+  --m2m-pg-info-dark: #0272ab;
+  --m2m-pg-info-bg: #e7f5fc;
+  --m2m-pg-info-border: #a9dcf3;
+
+  /* 컴포넌트 표면·테두리·텍스트 (컴포넌트가 참조하는 핵심 계열) */
+  --m2m-pg-comp-bg: #ffffff;
+  --m2m-pg-comp-bg-subtle: #f7f9fc;
+  --m2m-pg-comp-bg-disabled: #f2f4f8;
+  --m2m-pg-comp-bg-hover: #eef1f7;
+  --m2m-pg-comp-border: #dde2ec;
+  --m2m-pg-comp-border-sub: #c6cddc;
+  --m2m-pg-comp-text: #17203a;
+  --m2m-pg-comp-text-sub: #4a5266;
+  --m2m-pg-comp-text-muted: #6b7280;
+  --m2m-pg-comp-text-disabled: #a6acbd;
+
+  /* secondary 버튼 (스카이 블루 #008cd6) / 스켈레톤 */
+  --m2m-pg-secondary-bg: #008cd6;
+  --m2m-pg-secondary-text: #ffffff;
+  --m2m-pg-skeleton-base: #eef1f6;
+  --m2m-pg-skeleton-shine: #e0e5ee;
+}
+
+/* ── 다크 — 명시적 data-theme="dark" ────────────────────────────────────────── */
+[data-theme='dark'] {
+  --m2m-pg-brand: #4b8fe0;
+  --m2m-pg-brand-hover: #6ba3e8;
+  --m2m-pg-brand-active: #3a7fd4;
+  --m2m-pg-brand-light: #0c1c33;
+  --m2m-pg-brand-sub: #13294a;
+  --m2m-pg-brand-border: #2b4c7e;
+
+  --m2m-pg-bg-page: #0d1119;
+  --m2m-pg-bg-card: #161b28;
+  --m2m-pg-bg-subtle: #1c2438;
+  --m2m-pg-bg-header: #1c2438;
+  --m2m-pg-bg-code: #182034;
+  --m2m-pg-border: #2b345a;
+  --m2m-pg-border-sub: #3c4880;
+  --m2m-pg-text-primary: #e6ebf8;
+  --m2m-pg-text-sub: #bcc7e6;
+  --m2m-pg-text-muted: #97a2c6;
+  --m2m-pg-text-placeholder: #858ec0;
+  --m2m-pg-text-code: #6ba3e8;
+  --m2m-pg-sidebar-shadow: 2px 0 16px rgba(0, 0, 0, 0.4);
+  --m2m-pg-badge-bg: #0c1c33;
+  --m2m-pg-badge-color: #4b8fe0;
+  --m2m-pg-badge-border: #2b4c7e;
+
+  --m2m-pg-success: #22c55e;
+  --m2m-pg-success-dark: #16a34a;
+  --m2m-pg-success-bg: #052e16;
+  --m2m-pg-success-border: #166534;
+  --m2m-pg-error: #f87171;
+  --m2m-pg-error-dark: #ef4444;
+  --m2m-pg-error-bg: #2d0707;
+  --m2m-pg-error-border: #7f1d1d;
+  --m2m-pg-warning: #fcd34d;
+  --m2m-pg-warning-dark: #f59e0b;
+  --m2m-pg-warning-bg: #2d1700;
+  --m2m-pg-warning-border: #92400e;
+  --m2m-pg-info: #38bdf8;
+  --m2m-pg-info-dark: #0ea5e9;
+  --m2m-pg-info-bg: #082f42;
+  --m2m-pg-info-border: #075985;
+
+  --m2m-pg-comp-bg: #1e2338;
+  --m2m-pg-comp-bg-subtle: #262c42;
+  --m2m-pg-comp-bg-disabled: #151a2b;
+  --m2m-pg-comp-bg-hover: #2a3048;
+  --m2m-pg-comp-border: #545c8c;
+  --m2m-pg-comp-border-sub: #646ca6;
+  --m2m-pg-comp-text: #e6ebf8;
+  --m2m-pg-comp-text-sub: #bcc6e6;
+  --m2m-pg-comp-text-muted: #8f97c0;
+  --m2m-pg-comp-text-disabled: #5c6490;
+
+  --m2m-pg-secondary-bg: #0b9ee0;
+  --m2m-pg-secondary-text: #ffffff;
+  --m2m-pg-skeleton-base: #262a44;
+  --m2m-pg-skeleton-shine: #31365c;
+}
+
+/* ── 다크 — OS 설정 (단, data-theme="light" 로 강제 라이트 시 제외) ─────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --m2m-pg-brand: #4b8fe0;
+    --m2m-pg-brand-hover: #6ba3e8;
+    --m2m-pg-brand-active: #3a7fd4;
+    --m2m-pg-brand-light: #0c1c33;
+    --m2m-pg-brand-sub: #13294a;
+    --m2m-pg-brand-border: #2b4c7e;
+
+    --m2m-pg-bg-page: #0d1119;
+    --m2m-pg-bg-card: #161b28;
+    --m2m-pg-bg-subtle: #1c2438;
+    --m2m-pg-bg-header: #1c2438;
+    --m2m-pg-bg-code: #182034;
+    --m2m-pg-border: #2b345a;
+    --m2m-pg-border-sub: #3c4880;
+    --m2m-pg-text-primary: #e6ebf8;
+    --m2m-pg-text-sub: #bcc7e6;
+    --m2m-pg-text-muted: #97a2c6;
+    --m2m-pg-text-placeholder: #858ec0;
+    --m2m-pg-text-code: #6ba3e8;
+    --m2m-pg-sidebar-shadow: 2px 0 16px rgba(0, 0, 0, 0.4);
+    --m2m-pg-badge-bg: #0c1c33;
+    --m2m-pg-badge-color: #4b8fe0;
+    --m2m-pg-badge-border: #2b4c7e;
+
+    --m2m-pg-success: #22c55e;
+    --m2m-pg-success-dark: #16a34a;
+    --m2m-pg-success-bg: #052e16;
+    --m2m-pg-success-border: #166534;
+    --m2m-pg-error: #f87171;
+    --m2m-pg-error-dark: #ef4444;
+    --m2m-pg-error-bg: #2d0707;
+    --m2m-pg-error-border: #7f1d1d;
+    --m2m-pg-warning: #fcd34d;
+    --m2m-pg-warning-dark: #f59e0b;
+    --m2m-pg-warning-bg: #2d1700;
+    --m2m-pg-warning-border: #92400e;
+    --m2m-pg-info: #38bdf8;
+    --m2m-pg-info-dark: #0ea5e9;
+    --m2m-pg-info-bg: #082f42;
+    --m2m-pg-info-border: #075985;
+
+    --m2m-pg-comp-bg: #1e2338;
+    --m2m-pg-comp-bg-subtle: #262c42;
+    --m2m-pg-comp-bg-disabled: #151a2b;
+    --m2m-pg-comp-bg-hover: #2a3048;
+    --m2m-pg-comp-border: #545c8c;
+    --m2m-pg-comp-border-sub: #646ca6;
+    --m2m-pg-comp-text: #e6ebf8;
+    --m2m-pg-comp-text-sub: #bcc6e6;
+    --m2m-pg-comp-text-muted: #8f97c0;
+    --m2m-pg-comp-text-disabled: #5c6490;
+
+    --m2m-pg-secondary-bg: #0b9ee0;
+    --m2m-pg-secondary-text: #ffffff;
+    --m2m-pg-skeleton-base: #262a44;
+    --m2m-pg-skeleton-shine: #31365c;
+  }
+}

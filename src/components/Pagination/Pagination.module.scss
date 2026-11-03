@@ -1,0 +1,93 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_ACTIVE: 'is-active';
+$IS_DISABLED: 'is-disabled';
+$SIZE_SM: 'bsPaginationSizeSm';
+
+.bsPagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(12px);
+  flex-wrap: wrap;
+
+  &.#{$IS_DISABLED} {
+    opacity: 0.6;
+  }
+}
+
+.bsPaginationTotal {
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Body/Regular');
+}
+
+.bsPaginationList {
+  display: flex;
+  align-items: center;
+  gap: rem(4px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-left: auto;
+}
+
+.bsPaginationPage,
+.bsPaginationArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: rem(28px);
+  height: rem(28px);
+  padding: 0 rem(8px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(4px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text-sub);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+  @include typo('Sub/Regular');
+
+  &:hover:not(:disabled):not(.#{$IS_ACTIVE}) {
+    border-color: var(--m2m-pg-brand-border);
+    color: var(--m2m-pg-brand);
+  }
+
+  &:disabled {
+    color: var(--m2m-pg-comp-text-disabled);
+    cursor: default;
+  }
+}
+
+.bsPaginationPage.#{$IS_ACTIVE} {
+  border-color: var(--m2m-pg-brand);
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+  font-weight: 600;
+}
+
+.bsPaginationArrow {
+  font-size: rem(14px);
+}
+
+.bsPaginationEllipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: rem(20px);
+  color: var(--m2m-pg-comp-text-disabled);
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  .bsPaginationPage,
+  .bsPaginationArrow {
+    min-width: rem(24px);
+    height: rem(24px);
+    @include typo('Micro/Regular');
+  }
+}

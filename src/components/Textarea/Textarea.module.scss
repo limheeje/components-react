@@ -1,0 +1,103 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$HAS_COUNT: 'hasCount';
+$IS_DISABLED: 'is-disabled';
+$IS_ERROR: 'is-error';
+$IS_FOCUSED: 'is-focused';
+$IS_NO_RESIZE: 'is-no-resize';
+$IS_READONLY: 'is-readonly';
+
+.bsTextarea {
+  display: inline-flex;
+  flex-direction: column;
+  gap: rem(4px);
+  width: 100%;
+  max-width: 100%;
+}
+
+.bsTextareaField {
+  position: relative;
+  display: flex;
+  border: rem(1.5px) solid var(--m2m-pg-comp-border-sub);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+
+  &.#{$IS_FOCUSED} {
+    border-color: var(--m2m-pg-brand);
+  }
+
+  &.#{$IS_ERROR} {
+    border-color: var(--m2m-pg-error);
+  }
+
+  &.#{$IS_READONLY} {
+    background-color: var(--m2m-pg-comp-bg-subtle);
+  }
+
+  &.#{$IS_DISABLED} {
+    background-color: var(--m2m-pg-comp-bg-disabled);
+    opacity: 0.7;
+  }
+}
+
+.bsTextareaInp {
+  width: 100%;
+  padding: rem(9px) rem(12px);
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--m2m-pg-comp-text);
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  @include typo('Head/Regular');
+  /* iOS Safari 포커스 시 자동 확대 방지 — 시각 크기는 유지, font-size 만 16px */
+  font-size: rem(16px);
+
+  &::placeholder {
+    color: var(--m2m-pg-comp-text-disabled);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.#{$IS_NO_RESIZE} .bsTextarea {
+  resize: none;
+}
+
+.#{$HAS_COUNT} .bsTextarea {
+  padding-bottom: rem(24px);
+}
+
+.bsTextareaCount {
+  position: absolute;
+  right: rem(10px);
+  bottom: rem(8px);
+  color: var(--m2m-pg-comp-text-disabled);
+  pointer-events: none;
+  @include typo('Caption/Regular');
+}
+
+.bsTextareaCountMax {
+  color: var(--m2m-pg-error);
+}
+
+/* ── meta (error / helper) ────────────── */
+.bsTextareaMeta {
+  text-align: left;
+  @include typo('Caption/Regular');
+}
+
+.bsTextareaError {
+  color: var(--m2m-pg-error);
+}
+
+.bsTextareaHelper {
+  color: var(--m2m-pg-comp-text-muted);
+}

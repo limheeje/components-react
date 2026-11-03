@@ -1,0 +1,288 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$CARD_ERROR: 'bsImageUploadPreviewCardError';
+$IS_DISABLED: 'is-disabled';
+$IS_OVER: 'is-over';
+$ROW_ERROR: 'bsImageUploadPreviewRowError';
+
+.bsImageUploadPreview {
+  display: flex;
+  flex-direction: column;
+  gap: rem(12px);
+
+  &.#{$IS_DISABLED} {
+    opacity: 0.6;
+  }
+}
+
+.bsImageUploadPreviewInput {
+  @include hidden;
+}
+
+/* ── 드롭존 ────────────────────────────── */
+.bsImageUploadPreviewDropzone {
+  padding: rem(28px) rem(24px);
+  border: rem(2px) dashed var(--m2m-pg-comp-border-sub);
+  border-radius: rem(12px);
+  background-color: var(--m2m-pg-comp-bg);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &.#{$IS_OVER} {
+    border-color: var(--m2m-pg-brand);
+    background-color: var(--m2m-pg-brand-light);
+  }
+}
+
+.bsImageUploadPreviewDropIcon {
+  color: var(--m2m-pg-comp-border-sub);
+  margin: 0 auto rem(10px);
+}
+.bsImageUploadPreviewDropzone.#{$IS_OVER} .bsImageUploadPreviewDropIcon {
+  color: var(--m2m-pg-brand);
+}
+
+.bsImageUploadPreviewDropTitle {
+  display: block;
+  margin-bottom: rem(4px);
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Head/Medium');
+}
+.bsImageUploadPreviewDropzone.#{$IS_OVER} .bsImageUploadPreviewDropTitle {
+  color: var(--m2m-pg-brand);
+}
+
+.bsImageUploadPreviewDropHint {
+  display: block;
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Sub/Regular');
+}
+
+/* ── 그리드 ────────────────────────────── */
+.bsImageUploadPreviewGrid {
+  display: grid;
+  gap: rem(8px);
+}
+
+.bsImageUploadPreviewCard {
+  position: relative;
+  border-radius: rem(10px);
+  overflow: hidden;
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  flex-shrink: 0;
+
+  &:hover .bsImageUploadPreviewCardOverlay,
+  &:hover .bsImageUploadPreviewCardRemove {
+    opacity: 1;
+  }
+  &:hover .bsImageUploadPreviewCardImage {
+    transform: scale(1.06);
+  }
+}
+
+.bsImageUploadPreviewCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  cursor: zoom-in;
+  transition: transform 0.25s ease;
+}
+
+.bsImageUploadPreviewCardOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0 0 0 / 32%);
+  color: #fff;
+  cursor: zoom-in;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.bsImageUploadPreviewCardRemove {
+  position: absolute;
+  top: rem(5px);
+  right: rem(5px);
+  width: rem(22px);
+  height: rem(22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(0 0 0 / 55%);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.#{$CARD_ERROR} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: rem(4px);
+  border-color: var(--m2m-pg-error-border);
+  background-color: var(--m2m-pg-error-bg);
+
+  .bsImageUploadPreviewCardRemove {
+    opacity: 1;
+    background-color: rgb(0 0 0 / 15%);
+    color: var(--m2m-pg-error);
+  }
+}
+
+.bsImageUploadPreviewCardErrorIcon {
+  color: var(--m2m-pg-error);
+}
+
+.bsImageUploadPreviewCardErrorText {
+  padding: 0 rem(6px);
+  text-align: center;
+  color: var(--m2m-pg-error);
+  @include typo('Micro/Regular');
+}
+
+/* ── 추가 카드 ─────────────────────────── */
+.bsImageUploadPreviewAddCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: rem(4px);
+  border: rem(2px) dashed var(--m2m-pg-comp-border-sub);
+  border-radius: rem(10px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  color: var(--m2m-pg-comp-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  @include typo('Micro/Medium');
+
+  &:hover {
+    border-color: var(--m2m-pg-brand);
+    background-color: var(--m2m-pg-brand-light);
+    color: var(--m2m-pg-brand);
+  }
+}
+
+/* ── 리스트 ────────────────────────────── */
+.bsImageUploadPreviewList {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8px);
+}
+
+.bsImageUploadPreviewListAdd {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(8px);
+  width: fit-content;
+  padding: rem(8px) rem(14px);
+  border: rem(1.5px) dashed var(--m2m-pg-comp-border-sub);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text-sub);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  @include typo('Body/Regular');
+
+  &:hover {
+    border-color: var(--m2m-pg-brand);
+  }
+}
+
+.bsImageUploadPreviewRow {
+  display: flex;
+  align-items: center;
+  gap: rem(12px);
+  padding: rem(8px) rem(12px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(10px);
+  background-color: var(--m2m-pg-comp-bg);
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--m2m-pg-brand);
+  }
+
+  &.#{$ROW_ERROR} {
+    border-color: var(--m2m-pg-error-border);
+    background-color: var(--m2m-pg-error-bg);
+  }
+}
+
+.bsImageUploadPreviewRowThumb {
+  width: rem(52px);
+  height: rem(52px);
+  object-fit: cover;
+  border-radius: rem(8px);
+  flex-shrink: 0;
+  cursor: zoom-in;
+}
+
+.bsImageUploadPreviewRowThumbError {
+  width: rem(52px);
+  height: rem(52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-error-bg);
+  color: var(--m2m-pg-error);
+  flex-shrink: 0;
+}
+
+.bsImageUploadPreviewRowInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: rem(2px);
+}
+
+.bsImageUploadPreviewRowName {
+  @include text-ellipsis(1);
+  color: var(--m2m-pg-comp-text);
+  @include typo('Body/Medium');
+}
+.#{$ROW_ERROR} .bsImageUploadPreviewRowName {
+  color: var(--m2m-pg-error-dark);
+}
+
+.bsImageUploadPreviewRowMeta {
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Caption/Regular');
+}
+.#{$ROW_ERROR} .bsImageUploadPreviewRowMeta {
+  color: var(--m2m-pg-error);
+}
+
+.bsImageUploadPreviewRowActions {
+  display: flex;
+  gap: rem(6px);
+  flex-shrink: 0;
+}
+
+.bsImageUploadPreviewRowButton {
+  width: rem(28px);
+  height: rem(28px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(6px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  color: var(--m2m-pg-comp-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &.bsImageUploadPreviewRowButtonDanger {
+    color: var(--m2m-pg-error);
+  }
+}

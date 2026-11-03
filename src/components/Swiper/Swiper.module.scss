@@ -1,0 +1,114 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$ARROW_NEXT: 'bsSwiperArrowNext';
+$ARROW_PREV: 'bsSwiperArrowPrev';
+$BULLET_ACTIVE: 'bsSwiperBulletActive';
+
+.bsSwiper {
+  user-select: none;
+}
+
+.bsSwiperViewport {
+  position: relative;
+}
+
+.bsSwiperTrackClip {
+  overflow: hidden;
+  border-radius: rem(12px);
+}
+
+.bsSwiperTrack {
+  display: flex;
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.bsSwiperSlide {
+  flex-shrink: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  border-radius: rem(10px);
+  overflow: hidden;
+}
+
+/* ── 화살표 ────────────────────────────── */
+.bsSwiperArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(34px);
+  height: rem(34px);
+  border: none;
+  border-radius: 50%;
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text-sub);
+  box-shadow: 0 rem(2px) rem(10px) rgb(0 0 0 / 16%);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+.#{$ARROW_PREV} {
+  left: rem(10px);
+}
+.#{$ARROW_NEXT} {
+  right: rem(10px);
+}
+
+/* ── bullets ──────────────────────────── */
+.bsSwiperBullets {
+  display: flex;
+  justify-content: center;
+  gap: rem(6px);
+  margin-top: rem(12px);
+}
+
+.bsSwiperBullet {
+  width: rem(7px);
+  height: rem(7px);
+  padding: 0;
+  border: none;
+  border-radius: rem(4px);
+  background-color: var(--m2m-pg-comp-border);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.#{$BULLET_ACTIVE} {
+  width: rem(20px);
+  background-color: var(--m2m-pg-brand);
+}
+
+/* ── fraction ─────────────────────────── */
+.bsSwiperFraction {
+  margin-top: rem(10px);
+  text-align: center;
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Body/Regular');
+}
+.bsSwiperFractionCurrent {
+  color: var(--m2m-pg-brand);
+  font-weight: 700;
+}
+
+/* ── progressbar ──────────────────────── */
+.bsSwiperProgress {
+  margin-top: rem(10px);
+  height: rem(3px);
+  border-radius: rem(2px);
+  background-color: var(--m2m-pg-comp-bg-hover);
+  overflow: hidden;
+}
+.bsSwiperProgressBar {
+  height: 100%;
+  border-radius: rem(2px);
+  background-color: var(--m2m-pg-brand);
+  transition: width 0.38s ease;
+}

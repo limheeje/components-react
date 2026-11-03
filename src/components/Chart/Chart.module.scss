@@ -1,0 +1,13 @@
+@use '~/assets/styles/theme' as *;
+
+.bsChart {
+  width: 100%;
+
+  // recharts 텍스트도 토큰 색으로
+  :global(.recharts-text) {
+    fill: var(--m2m-pg-comp-text-muted);
+  }
+  :global(.recharts-legend-item-text) {
+    color: var(--m2m-pg-comp-text-sub) !important;
+  }
+}

@@ -1,0 +1,237 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_DISABLED: 'is-disabled';
+$IS_ERROR: 'is-error';
+$IS_OPEN: 'is-open';
+$IS_PLACEHOLDER: 'is-placeholder';
+$SIZE_LG: 'bsTimePickerSizeLg';
+$SIZE_MD: 'bsTimePickerSizeMd';
+$SIZE_SM: 'bsTimePickerSizeSm';
+
+.bsTimePicker {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: rem(4px);
+  width: 100%;
+}
+
+.bsTimePickerTrigger {
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+  width: 100%;
+  border: rem(1.5px) solid var(--m2m-pg-comp-border-sub);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: border-color 0.15s ease;
+
+  &:focus-visible,
+  &.#{$IS_OPEN} {
+    border-color: var(--m2m-pg-brand);
+  }
+  &.#{$IS_ERROR} {
+    border-color: var(--m2m-pg-error);
+  }
+  &.#{$IS_DISABLED} {
+    background-color: var(--m2m-pg-comp-bg-disabled);
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+  &.#{$IS_PLACEHOLDER} .bsTimePickerValue {
+    color: var(--m2m-pg-comp-text-disabled);
+  }
+}
+
+.bsTimePickerClockIcon {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-disabled);
+}
+.bsTimePickerTrigger.#{$IS_OPEN} .bsTimePickerClockIcon {
+  color: var(--m2m-pg-brand);
+}
+
+.bsTimePickerValue {
+  flex: 1;
+}
+
+.bsTimePickerClearButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--m2m-pg-comp-text-disabled);
+  cursor: pointer;
+  font-size: rem(12px);
+
+  &:hover {
+    color: var(--m2m-pg-comp-text-muted);
+  }
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  .bsTimePickerTrigger {
+    padding: rem(5px) rem(10px);
+    font-size: rem(13px);
+    @include typo('Sub/Regular');
+  }
+}
+.#{$SIZE_MD} {
+  .bsTimePickerTrigger {
+    padding: rem(8px) rem(12px);
+    font-size: rem(14px);
+    @include typo('Head/Regular');
+  }
+}
+.#{$SIZE_LG} {
+  .bsTimePickerTrigger {
+    padding: rem(11px) rem(14px);
+    font-size: rem(16px);
+    @include typo('Title3/Regular');
+  }
+}
+
+/* ── popup ────────────────────────────── */
+.bsTimePickerPopup {
+  position: absolute;
+  top: calc(100% + #{rem(6px)});
+  left: 0;
+  z-index: 300;
+  padding: rem(16px) rem(14px) rem(12px);
+  border: rem(1.5px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(14px);
+  background-color: var(--m2m-pg-comp-bg);
+  box-shadow: 0 rem(8px) rem(32px) rgba(0, 0, 0, 0.13);
+}
+
+.bsTimePickerColumns {
+  display: flex;
+  gap: rem(6px);
+  align-items: flex-start;
+}
+
+.bsTimePickerColon {
+  flex-shrink: 0;
+  margin-top: rem(40px);
+  color: var(--m2m-pg-comp-border);
+  font-size: rem(24px);
+  font-weight: 700;
+}
+
+.bsTimePickerColumn {
+  width: rem(58px);
+  text-align: center;
+}
+
+.bsTimePickerColumnLabel {
+  margin-bottom: rem(6px);
+  color: var(--m2m-pg-comp-text-disabled);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  @include typo('Micro/Bold');
+}
+
+.bsTimePickerColumnBox {
+  position: relative;
+}
+
+.bsTimePickerColumnList {
+  height: rem(216px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(10px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+}
+
+.bsTimePickerCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: rem(36px);
+  /* 휠 숫자: 디자인상 monospace 고정 폭 */
+  font-family: 'Fira Mono', 'Courier New', monospace;
+  font-size: rem(17px);
+  color: var(--m2m-pg-comp-text-sub);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.08s ease;
+
+  &:hover:not(.bsTimePickerCellSelected) {
+    background-color: var(--m2m-pg-comp-bg-hover);
+  }
+}
+
+.bsTimePickerCellSelected {
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+  font-weight: 700;
+}
+
+.bsTimePickerFadeTop,
+.bsTimePickerFadeBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: rem(40px);
+  pointer-events: none;
+}
+.bsTimePickerFadeTop {
+  top: 0;
+  border-radius: rem(10px) rem(10px) 0 0;
+  background: linear-gradient(to bottom, var(--m2m-pg-comp-bg-subtle) 20%, transparent);
+}
+.bsTimePickerFadeBottom {
+  bottom: 0;
+  border-radius: 0 0 rem(10px) rem(10px);
+  background: linear-gradient(to top, var(--m2m-pg-comp-bg-subtle) 20%, transparent);
+}
+
+.bsTimePickerFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: rem(8px);
+  margin-top: rem(14px);
+  padding-top: rem(12px);
+  border-top: rem(1px) solid var(--m2m-pg-comp-border);
+}
+
+.bsTimePickerCancelButton,
+.bsTimePickerConfirmButton {
+  padding: rem(6px) rem(16px);
+  border-radius: rem(7px);
+  font: inherit;
+  cursor: pointer;
+  @include typo('Sub/Regular');
+}
+
+.bsTimePickerCancelButton {
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text-sub);
+}
+
+.bsTimePickerConfirmButton {
+  border: none;
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ── meta ─────────────────────────────── */
+.bsTimePickerMeta {
+  @include typo('Caption/Regular');
+}
+.bsTimePickerError {
+  color: var(--m2m-pg-error);
+}
+.bsTimePickerHelper {
+  color: var(--m2m-pg-comp-text-muted);
+}

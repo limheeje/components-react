@@ -1,0 +1,81 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$HAS_ARROW: 'has-arrow';
+$PLACEMENT_BOTTOM: 'bsTooltipPlacementBottom';
+$PLACEMENT_LEFT: 'bsTooltipPlacementLeft';
+$PLACEMENT_RIGHT: 'bsTooltipPlacementRight';
+$PLACEMENT_TOP: 'bsTooltipPlacementTop';
+
+.bsTooltipWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.bsTooltip {
+  position: absolute;
+  z-index: 100;
+  padding: rem(6px) rem(10px);
+  border-radius: rem(6px);
+  background-color: var(--m2m-pg-secondary-bg);
+  color: var(--m2m-pg-secondary-text);
+  white-space: nowrap;
+  pointer-events: none;
+  @include typo('Sub/Regular');
+}
+
+/* ── placement ────────────────────────── */
+.#{$PLACEMENT_TOP} {
+  bottom: calc(100% + #{rem(8px)});
+  left: 50%;
+  transform: translateX(-50%);
+}
+.#{$PLACEMENT_BOTTOM} {
+  top: calc(100% + #{rem(8px)});
+  left: 50%;
+  transform: translateX(-50%);
+}
+.#{$PLACEMENT_LEFT} {
+  right: calc(100% + #{rem(8px)});
+  top: 50%;
+  transform: translateY(-50%);
+}
+.#{$PLACEMENT_RIGHT} {
+  left: calc(100% + #{rem(8px)});
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ── arrow ────────────────────────────── */
+.#{$HAS_ARROW}::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: rem(5px) solid transparent;
+}
+
+.#{$HAS_ARROW}.#{$PLACEMENT_TOP}::after {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--m2m-pg-secondary-bg);
+}
+.#{$HAS_ARROW}.#{$PLACEMENT_BOTTOM}::after {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--m2m-pg-secondary-bg);
+}
+.#{$HAS_ARROW}.#{$PLACEMENT_LEFT}::after {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left-color: var(--m2m-pg-secondary-bg);
+}
+.#{$HAS_ARROW}.#{$PLACEMENT_RIGHT}::after {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-right-color: var(--m2m-pg-secondary-bg);
+}

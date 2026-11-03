@@ -1,0 +1,179 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_DISABLED: 'is-disabled';
+$IS_ERROR: 'is-error';
+$IS_OVER: 'is-over';
+
+.bsFileUpload {
+  display: flex;
+  flex-direction: column;
+  gap: rem(10px);
+
+  &.#{$IS_DISABLED} {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+}
+
+.bsFileUploadInput {
+  @include hidden;
+}
+
+/* ── 버튼 모드 ─────────────────────────── */
+.bsFileUploadTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(8px);
+  width: fit-content;
+  padding: rem(9px) rem(18px);
+  border: rem(1.5px) dashed var(--m2m-pg-comp-border-sub);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text-sub);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+  @include typo('Body/Medium');
+
+  &:hover:not(:disabled) {
+    border-color: var(--m2m-pg-brand);
+  }
+  &:disabled {
+    background-color: var(--m2m-pg-comp-bg-disabled);
+    color: var(--m2m-pg-comp-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.bsFileUploadCount {
+  color: var(--m2m-pg-comp-text-disabled);
+  @include typo('Sub/Regular');
+}
+
+/* ── 드래그 모드 ───────────────────────── */
+.bsFileUploadDropzone {
+  padding: rem(32px) rem(24px);
+  border: rem(2px) dashed var(--m2m-pg-comp-border-sub);
+  border-radius: rem(12px);
+  background-color: var(--m2m-pg-comp-bg);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &.#{$IS_OVER} {
+    border-color: var(--m2m-pg-brand);
+    background-color: var(--m2m-pg-brand-light);
+  }
+}
+
+.bsFileUploadDropIcon {
+  color: var(--m2m-pg-comp-border-sub);
+  margin: 0 auto rem(10px);
+}
+.bsFileUploadDropzone.#{$IS_OVER} .bsFileUploadDropIcon {
+  color: var(--m2m-pg-brand);
+}
+
+.bsFileUploadDropTitle {
+  display: block;
+  margin-bottom: rem(4px);
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Head/Medium');
+}
+.bsFileUploadDropzone.#{$IS_OVER} .bsFileUploadDropTitle {
+  color: var(--m2m-pg-brand);
+}
+
+.bsFileUploadDropHint {
+  display: block;
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Sub/Regular');
+}
+
+/* ── 파일 목록 ─────────────────────────── */
+.bsFileUploadList {
+  display: flex;
+  flex-direction: column;
+  gap: rem(6px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bsFileUploadItem {
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  padding: rem(8px) rem(12px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg-subtle);
+
+  &.#{$IS_ERROR} {
+    border-color: var(--m2m-pg-error);
+    background-color: var(--m2m-pg-error-bg);
+  }
+}
+
+.bsFileUploadThumb {
+  width: rem(36px);
+  height: rem(36px);
+  object-fit: cover;
+  border-radius: rem(4px);
+  flex-shrink: 0;
+}
+
+.bsFileUploadFileIcon {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-muted);
+}
+.bsFileUploadItem.#{$IS_ERROR} .bsFileUploadFileIcon {
+  color: var(--m2m-pg-error);
+}
+
+.bsFileUploadInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: rem(2px);
+}
+
+.bsFileUploadName {
+  @include text-ellipsis(1);
+  color: var(--m2m-pg-comp-text);
+  @include typo('Body/Regular');
+}
+
+.bsFileUploadMeta {
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Caption/Regular');
+}
+.bsFileUploadItem.#{$IS_ERROR} .bsFileUploadMeta {
+  color: var(--m2m-pg-error);
+}
+
+.bsFileUploadStatusDone {
+  flex-shrink: 0;
+  color: var(--m2m-pg-success);
+}
+.bsFileUploadStatusError {
+  flex-shrink: 0;
+  color: var(--m2m-pg-error);
+}
+
+.bsFileUploadRemoveButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: rem(2px);
+  border: none;
+  background: none;
+  color: var(--m2m-pg-comp-text-muted);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--m2m-pg-comp-text);
+  }
+}

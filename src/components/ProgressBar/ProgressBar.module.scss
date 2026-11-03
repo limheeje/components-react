@@ -1,0 +1,92 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$COLOR_DANGER: 'bsProgressBarColorDanger';
+$COLOR_PRIMARY: 'bsProgressBarColorPrimary';
+$COLOR_SUCCESS: 'bsProgressBarColorSuccess';
+$COLOR_WARNING: 'bsProgressBarColorWarning';
+$IS_ANIMATED: 'is-animated';
+$THICKNESS_LG: 'bsProgressBarThicknessLg';
+$THICKNESS_MD: 'bsProgressBarThicknessMd';
+$THICKNESS_SM: 'bsProgressBarThicknessSm';
+
+.bsProgressBar {
+  width: 100%;
+  --pb-color: var(--m2m-pg-brand);
+}
+
+.bsProgressBarHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(6px);
+}
+
+.bsProgressBarLabel {
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Body/Regular');
+}
+
+.bsProgressBarValue {
+  color: var(--pb-color);
+  @include typo('Sub/Bold');
+}
+
+.bsProgressBarTrack {
+  width: 100%;
+  border-radius: rem(999px);
+  background-color: var(--m2m-pg-comp-bg-hover);
+  overflow: hidden;
+}
+
+.bsProgressBarFill {
+  height: 100%;
+  border-radius: rem(999px);
+  background-color: var(--pb-color);
+  transition: width 0.45s ease;
+}
+
+.#{$IS_ANIMATED} {
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--pb-color) 70%, transparent) 0%,
+    var(--pb-color) 50%,
+    color-mix(in srgb, var(--pb-color) 70%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: bsProgressBarPbFlow 1.5s linear infinite;
+}
+
+@keyframes bsProgressBarPbFlow {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ── color ────────────────────────────── */
+.#{$COLOR_PRIMARY} {
+  --pb-color: var(--m2m-pg-brand);
+}
+.#{$COLOR_SUCCESS} {
+  --pb-color: var(--m2m-pg-success);
+}
+.#{$COLOR_WARNING} {
+  --pb-color: var(--m2m-pg-warning);
+}
+.#{$COLOR_DANGER} {
+  --pb-color: var(--m2m-pg-error);
+}
+
+/* ── thickness ────────────────────────── */
+.#{$THICKNESS_SM} .bsProgressBarTrack {
+  height: rem(5px);
+}
+.#{$THICKNESS_MD} .bsProgressBarTrack {
+  height: rem(10px);
+}
+.#{$THICKNESS_LG} .bsProgressBarTrack {
+  height: rem(18px);
+}

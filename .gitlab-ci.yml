@@ -1,0 +1,53 @@
+stages:
+  - test
+  - publish
+  - vercel-release
+
+variables:
+  # semantic-release 가 전체 커밋 이력과 태그를 볼 수 있도록 얕은 클론 해제
+  GIT_DEPTH: 0
+
+default:
+  image: node:22
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+
+test:
+  stage: test
+  script:
+    - npm run lint
+    - npm run type-check
+    - npx vitest run
+    - npm run build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
+
+release:
+  stage: publish
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+    - git config user.email "ci@m2m-uiux"
+    - git config user.name "semantic-release"
+    - git remote set-url origin "http://oauth2:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+  script:
+    - npm run build
+    - npx semantic-release
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  environment:
+    name: npm
+
+vercel-release:
+  stage: vercel-release
+  needs: ['test']
+  script:
+    - npx --yes vercel@59.11.2 deploy --prod --token="$VERCEL_TOKEN" --yes
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"

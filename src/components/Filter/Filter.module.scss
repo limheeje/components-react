@@ -1,0 +1,186 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier 클래스명 (단일 소스) ──────────────────────────
+$IS_ACTIVE: 'is-active';
+
+// bottom drawer(size=full) — RegionPicker 와 동일하게 상단 여백을 남긴 플로팅 시트로.
+.bsFilterPanel {
+  width: 100%;
+  max-width: 100%;
+  height: calc(100vh - #{rem(150px)});
+  max-height: calc(100vh - #{rem(150px)});
+}
+
+.bsFilterPanel .bsDialogBody {
+  padding: 0;
+}
+
+.bsFilterPanel .bsDialogFooter {
+  padding: rem(12px) rem(16px) calc(env(safe-area-inset-bottom, 0px) + #{rem(12px)});
+}
+
+// ── 본문(스크롤 영역) ────────────────────────────
+.bsFilterBody {
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.bsFilterSection {
+  padding: rem(16px);
+  border-bottom: rem(1px) solid var(--m2m-pg-comp-border-sub);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.bsFilterSectionTitle {
+  margin: 0 0 rem(10px);
+  color: var(--m2m-pg-comp-text);
+  @include typo('Body/Semibold');
+}
+
+// ── 브랜드 섹션: 검색 ──────────────────────────
+.bsFilterBrandSearch {
+  display: flex;
+  align-items: center;
+  gap: rem(6px);
+  padding: rem(8px) rem(12px);
+  margin-bottom: rem(10px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  color: var(--m2m-pg-comp-text-muted);
+}
+
+.bsFilterBrandSearchInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--m2m-pg-comp-text);
+  @include typo('Body/Regular');
+
+  &::placeholder {
+    color: var(--m2m-pg-comp-text-disabled);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// ── 브랜드 섹션: 초성/알파벳 탐색 ──────────────
+.bsFilterAlphabet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(6px);
+  margin-bottom: rem(10px);
+}
+
+.bsFilterAlphabetItem {
+  padding: rem(4px) rem(10px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(999px);
+  background: none;
+  color: var(--m2m-pg-comp-text-sub);
+  cursor: pointer;
+  @include typo('Caption/Medium');
+
+  &:hover {
+    background-color: var(--m2m-pg-comp-bg-hover);
+  }
+
+  &.#{$IS_ACTIVE} {
+    border-color: var(--m2m-pg-brand);
+    background-color: var(--m2m-pg-brand);
+    color: #fff;
+  }
+}
+
+.bsFilterEmpty {
+  margin: rem(16px) 0;
+  color: var(--m2m-pg-comp-text-disabled);
+  text-align: center;
+  @include typo('Sub/Regular');
+}
+
+.bsFilterBrandPagination {
+  margin-top: rem(12px);
+}
+
+// ── 가격대(range) 섹션 ─────────────────────────
+.bsFilterRange {
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+}
+
+.bsFilterRangeInput {
+  flex: 1;
+  min-width: 0;
+  padding: rem(10px) rem(12px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  @include typo('Body/Regular');
+
+  &::placeholder {
+    color: var(--m2m-pg-comp-text-disabled);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--m2m-pg-brand);
+  }
+}
+
+.bsFilterRangeSeparator {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-muted);
+}
+
+// ── 하단 액션(초기화/적용하기) ────────────────
+.bsFilterActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(12px);
+  width: 100%;
+}
+
+.bsFilterReset {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: rem(4px);
+  padding: rem(8px) rem(4px);
+  border: 0;
+  background: none;
+  color: var(--m2m-pg-comp-text-muted);
+  cursor: pointer;
+  @include typo('Body/Medium');
+
+  &:hover {
+    color: var(--m2m-pg-comp-text-sub);
+  }
+}
+
+.bsFilterConfirm {
+  flex-shrink: 0;
+  padding: rem(12px) rem(24px);
+  border: 0;
+  border-radius: rem(10px);
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+  cursor: pointer;
+  @include typo('Body/Semibold');
+
+  &:hover {
+    background-color: var(--m2m-pg-brand-hover);
+  }
+}

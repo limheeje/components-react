@@ -1,0 +1,31 @@
+// =============================================================================
+// SCSS 함수
+// =============================================================================
+@use 'sass:math';
+@use 'sass:string';
+
+$base-font-size: 16px;
+
+// px → 스케일 단위.
+// 기준은 :root 의 --m2m-font-size 다. 소비 앱이 재정의하면 컴포넌트 전체 치수(폰트·패딩·테두리 등)가
+// 그에 비례해 스케일되고, 재정의하지 않으면 fallback 16px 로 동작한다. 1px(테두리 등)도 스케일 대상.
+//   rem(24px) → calc(var(--m2m-font-size, 16px) / 16 * 24)
+@function rem($px) {
+  @if $px == 0 {
+    @return 0;
+  }
+  $n: math.div($px, 1px); // 24px → 24, -8px → -8, 0.5px → 0.5
+  @return calc(var(--m2m-font-size, #{$base-font-size}) / #{math.div($base-font-size, 1px)} * #{$n});
+}
+
+// 긴 문자열 치환. 재귀 대신 @while 로 (재귀 시 콜스택 오버플로우로 컴파일 사망).
+@function str-replace($s, $search, $replace) {
+  $result: '';
+  $remaining: $s;
+  @while string.index($remaining, $search) {
+    $index: string.index($remaining, $search);
+    $result: $result + string.slice($remaining, 1, $index - 1) + $replace;
+    $remaining: string.slice($remaining, $index + string.length($search));
+  }
+  @return $result + $remaining;
+}

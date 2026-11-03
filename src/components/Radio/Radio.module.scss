@@ -1,0 +1,107 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_DISABLED: 'is-disabled';
+$IS_ERROR: 'is-error';
+$SIZE_LG: 'bsRadioSizeLg';
+$SIZE_MD: 'bsRadioSizeMd';
+$SIZE_SM: 'bsRadioSizeSm';
+
+.bsRadio {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(8px);
+  cursor: pointer;
+  user-select: none;
+  color: var(--m2m-pg-comp-text);
+
+  &.#{$IS_DISABLED} {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.bsRadioInput {
+  @include hidden;
+}
+
+.bsRadioCircle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: rem(2px) solid var(--m2m-pg-comp-text-disabled);
+  border-radius: 50%;
+  background-color: var(--m2m-pg-comp-bg);
+  transition: border-color 0.15s ease;
+}
+
+.bsRadioDot {
+  /* 크기는 size 별 px 로 지정 (50% 는 서브픽셀 정렬 어긋남) */
+  border-radius: 50%;
+  background-color: var(--m2m-pg-brand);
+  transform: scale(0);
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.bsRadioInput:checked ~ .bsRadioCircle {
+  border-color: var(--m2m-pg-brand);
+}
+
+.bsRadioInput:checked ~ .bsRadioCircle .bsRadioDot {
+  transform: scale(1);
+}
+
+.bsRadioInput:focus-visible ~ .bsRadioCircle {
+  outline: rem(2px) solid var(--m2m-pg-brand);
+  outline-offset: rem(2px);
+}
+
+.bsRadio.#{$IS_ERROR} .bsRadioCircle {
+  border-color: var(--m2m-pg-error);
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  .bsRadioCircle {
+    width: rem(14px);
+    height: rem(14px);
+  }
+  .bsRadioDot {
+    width: rem(6px);
+    height: rem(6px);
+  }
+  .bsRadioLabel {
+    @include typo('Sub/Regular');
+  }
+}
+
+.#{$SIZE_MD} {
+  .bsRadioCircle {
+    width: rem(18px);
+    height: rem(18px);
+  }
+  .bsRadioDot {
+    width: rem(8px);
+    height: rem(8px);
+  }
+  .bsRadioLabel {
+    @include typo('Head/Regular');
+  }
+}
+
+.#{$SIZE_LG} {
+  .bsRadioCircle {
+    width: rem(22px);
+    height: rem(22px);
+  }
+  .bsRadioDot {
+    width: rem(10px);
+    height: rem(10px);
+  }
+  .bsRadioLabel {
+    @include typo('Title3/Regular');
+  }
+}

@@ -1,0 +1,33 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$SPIN: 'bsIconSpin';
+$CLICKABLE: 'bsIconClickable';
+
+.bsIcon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  background-color: currentColor;
+}
+
+.#{$CLICKABLE} {
+  cursor: pointer;
+}
+
+.#{$SPIN} {
+  animation: bsIconSpinAnim 1s linear infinite;
+}
+
+@keyframes bsIconSpinAnim {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* icon-map() 의 모든 키에 대해 마스크 클래스 생성 (.i-<key> — 전역 관례, bs 접두 예외) */
+@each $key, $svg in icon-map() {
+  .i-#{$key} {
+    @include get-background-svg('#{$key}', currentColor);
+  }
+}

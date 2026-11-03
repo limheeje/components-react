@@ -1,0 +1,13 @@
+// =============================================================================
+// 컴포넌트 SCSS 진입점.
+//   각 *.module.scss 최상단: `@use '~/assets/styles/theme' as *;`
+//   → rem(), str-replace(), $font-family, $base-font-size, $typo-map,
+//     icon-map(), get-background-svg(), typo(), hidden, text-ellipsis 사용 가능.
+//
+// --m2m-* CSS 변수의 "값"은 여기서 다루지 않는다. 그 기본값은 tokens.css(수기 CSS)가 소유하고
+// 각 컴포넌트 index.ts 의 `import '~/assets/styles/tokens.css';` 가 dist/style.css 에 인라인한다.
+// =============================================================================
+@forward 'function';
+@forward 'typography';
+@forward 'icons';
+@forward 'mixin';

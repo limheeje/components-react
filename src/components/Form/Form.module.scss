@@ -1,0 +1,149 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$ALIGN_BETWEEN: 'bsFormAlignBetween';
+$ALIGN_CENTER: 'bsFormAlignCenter';
+$ALIGN_END: 'bsFormAlignEnd';
+$ALIGN_START: 'bsFormAlignStart';
+$FIELD_HORIZONTAL: 'bsFormFieldHorizontal';
+$FIELD_INLINE: 'bsFormFieldInline';
+$FIELD_VERTICAL: 'bsFormFieldVertical';
+$IS_DISABLED: 'is-disabled';
+$LAYOUT_INLINE: 'bsFormLayoutInline';
+
+.bsForm {
+  width: 100%;
+}
+
+.bsFormFieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 0;
+  row-gap: rem(16px);
+  min-width: 0;
+
+  > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+}
+
+.bsForm.#{$IS_DISABLED} {
+  opacity: 0.7;
+}
+
+/* inline 폼 전체 */
+.#{$LAYOUT_INLINE} .bsFormFieldset {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: rem(12px);
+}
+
+/* ── 필드 ──────────────────────────────── */
+.bsFormField {
+  min-width: 0;
+}
+
+.#{$FIELD_VERTICAL} {
+  display: flex;
+  flex-direction: column;
+  gap: rem(6px);
+}
+
+.#{$FIELD_HORIZONTAL} {
+  display: flex;
+  align-items: flex-start;
+  gap: rem(12px);
+
+  .bsFormLabel {
+    flex-shrink: 0;
+    text-align: right;
+    padding-top: rem(9px);
+  }
+  .bsFormControl {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.#{$FIELD_INLINE} {
+  display: flex;
+  align-items: flex-start;
+  gap: rem(8px);
+
+  .bsFormLabel {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    min-height: rem(40px);
+  }
+
+  .bsFormControl {
+    flex: 1;
+  }
+}
+
+@supports (grid-template-columns: subgrid) {
+  .bsForm:not(.#{$LAYOUT_INLINE}) > .bsFormFieldset > .#{$FIELD_INLINE} {
+    display: grid;
+    grid-template-columns: subgrid;
+    column-gap: 0;
+    align-items: start;
+
+    .bsFormLabel {
+      padding-right: rem(12px);
+    }
+  }
+}
+
+.bsFormLabel {
+  color: var(--m2m-pg-comp-text);
+  white-space: nowrap;
+  @include typo('Body/Semibold');
+}
+
+.bsFormRequired {
+  margin-left: rem(3px);
+  color: var(--m2m-pg-error);
+}
+
+.bsFormControl {
+  display: flex;
+  flex-direction: column;
+  gap: rem(6px);
+  min-width: 0;
+}
+
+.bsFormError {
+  color: var(--m2m-pg-error);
+  @include typo('Caption/Regular');
+}
+
+.bsFormHelp {
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Caption/Regular');
+}
+
+/* ── 액션 ──────────────────────────────── */
+.bsFormActions {
+  display: flex;
+  gap: rem(10px);
+  margin-top: rem(4px);
+}
+.#{$ALIGN_START} {
+  justify-content: flex-start;
+}
+.#{$ALIGN_CENTER} {
+  justify-content: center;
+}
+.#{$ALIGN_END} {
+  justify-content: flex-end;
+}
+.#{$ALIGN_BETWEEN} {
+  justify-content: space-between;
+}

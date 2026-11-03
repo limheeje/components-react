@@ -1,0 +1,169 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_VERTICAL: 'is-vertical';
+$NODE_CURRENT: 'bsStepsNodeCurrent';
+$NODE_DONE: 'bsStepsNodeDone';
+$NODE_UPCOMING: 'bsStepsNodeUpcoming';
+$STATUS_ERROR: 'bsStepsStatusError';
+$STATUS_FINISH: 'bsStepsStatusFinish';
+
+.bsSteps {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.bsStepsStep {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* 노드 색상 (node-state / status 로 덮어씀) */
+  --step-node-bg: var(--m2m-pg-comp-bg);
+  --step-node-border: var(--m2m-pg-comp-border);
+  --step-node-color: var(--m2m-pg-comp-text-disabled);
+  --step-line: var(--m2m-pg-comp-border);
+}
+
+.#{$NODE_DONE} {
+  --step-node-bg: var(--m2m-pg-success);
+  --step-node-border: var(--m2m-pg-success);
+  --step-node-color: #fff;
+  --step-line: var(--m2m-pg-success);
+}
+
+.#{$NODE_CURRENT} {
+  --step-node-bg: var(--m2m-pg-brand);
+  --step-node-border: var(--m2m-pg-brand);
+  --step-node-color: #fff;
+}
+
+.bsSteps.#{$STATUS_ERROR} .#{$NODE_CURRENT} {
+  --step-node-bg: var(--m2m-pg-error);
+  --step-node-border: var(--m2m-pg-error);
+}
+
+.bsSteps.#{$STATUS_FINISH} .#{$NODE_CURRENT} {
+  --step-node-bg: var(--m2m-pg-success);
+  --step-node-border: var(--m2m-pg-success);
+}
+
+.bsStepsRail {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.bsStepsLine {
+  flex: 1;
+  height: rem(2px);
+  background-color: var(--m2m-pg-comp-border);
+}
+
+.#{$NODE_DONE} .bsStepsLine,
+.#{$NODE_CURRENT} .bsStepsLine[data-lead] {
+  background-color: var(--m2m-pg-success);
+}
+.#{$NODE_CURRENT} .bsStepsLine[data-trail],
+.#{$NODE_UPCOMING} .bsStepsLine {
+  background-color: var(--m2m-pg-comp-border);
+}
+.bsSteps:not(.#{$IS_VERTICAL}) .bsStepsStep:first-child .bsStepsLine[data-lead] {
+  background-color: transparent;
+}
+
+.bsStepsNode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: rem(32px);
+  height: rem(32px);
+  border-radius: 50%;
+  background-color: var(--step-node-bg);
+  border: rem(2px) solid var(--step-node-border);
+  color: var(--step-node-color);
+  @include typo('Body/Bold');
+}
+
+.bsStepsLabel {
+  display: flex;
+  flex-direction: column;
+  gap: rem(2px);
+  margin-top: rem(8px);
+  padding: 0 rem(4px);
+  text-align: center;
+}
+
+.bsStepsTitle {
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--m2m-pg-comp-text-disabled);
+  @include typo('Sub/Regular');
+}
+
+.#{$NODE_DONE} .bsStepsTitle {
+  color: var(--m2m-pg-comp-text-sub);
+}
+.#{$NODE_CURRENT} .bsStepsTitle {
+  color: var(--m2m-pg-comp-text);
+  font-weight: 700;
+}
+
+.bsStepsDescription {
+  white-space: nowrap;
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Caption/Regular');
+}
+
+/* ── vertical ─────────────────────────── */
+.#{$IS_VERTICAL} {
+  flex-direction: column;
+  align-items: stretch;
+  width: auto;
+}
+
+.#{$IS_VERTICAL} .bsStepsStep {
+  flex: none;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: rem(14px);
+}
+
+.#{$IS_VERTICAL} .bsStepsRail {
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  width: auto;
+}
+
+.#{$IS_VERTICAL} .bsStepsLine {
+  width: rem(2px);
+  height: auto;
+  flex: 1;
+  min-height: rem(24px);
+  margin: rem(4px) 0;
+}
+
+.#{$IS_VERTICAL} .bsStepsLine[data-lead] {
+  display: none;
+}
+
+.#{$IS_VERTICAL} .bsStepsLabel {
+  margin-top: 0;
+  padding: rem(4px) 0 rem(24px);
+  text-align: left;
+  align-items: flex-start;
+}
+
+.#{$IS_VERTICAL} .bsStepsStep:last-child .bsStepsLabel {
+  padding-bottom: 0;
+}
+
+.#{$IS_VERTICAL} .bsStepsTitle,
+.#{$IS_VERTICAL} .bsStepsDescription {
+  white-space: normal;
+}

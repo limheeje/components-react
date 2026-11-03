@@ -1,0 +1,25 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$DIRECTION_HORIZONTAL: 'bsCheckboxGroupDirectionHorizontal';
+$DIRECTION_VERTICAL: 'bsCheckboxGroupDirectionVertical';
+$IS_DISABLED: 'is-disabled';
+
+.bsCheckboxGroup {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.#{$DIRECTION_VERTICAL} {
+  flex-direction: column;
+  gap: rem(10px);
+}
+
+.#{$DIRECTION_HORIZONTAL} {
+  flex-direction: row;
+  gap: rem(20px);
+}
+
+.#{$IS_DISABLED} {
+  opacity: 0.6;
+}

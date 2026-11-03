@@ -1,0 +1,132 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_ROUND: 'is-round';
+$IS_DOT: 'isDot';
+$SIZE_LG: 'bsBadgeSizeLg';
+$SIZE_MD: 'bsBadgeSizeMd';
+$SIZE_SM: 'bsBadgeSizeSm';
+$TYPE_DANGER: 'bsBadgeTypeDanger';
+$TYPE_DANGER_LIGHT: 'bsBadgeTypeDangerLight';
+$TYPE_GHOST: 'bsBadgeTypeGhost';
+$TYPE_INFO: 'bsBadgeTypeInfo';
+$TYPE_INFO_LIGHT: 'bsBadgeTypeInfoLight';
+$TYPE_PRIMARY: 'bsBadgeTypePrimary';
+$TYPE_PRIMARY_LIGHT: 'bsBadgeTypePrimaryLight';
+$TYPE_SECONDARY: 'bsBadgeTypeSecondary';
+$TYPE_SUCCESS: 'bsBadgeTypeSuccess';
+$TYPE_SUCCESS_LIGHT: 'bsBadgeTypeSuccessLight';
+$TYPE_WARNING: 'bsBadgeTypeWarning';
+$TYPE_WARNING_LIGHT: 'bsBadgeTypeWarningLight';
+
+.bsBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(6px);
+  width: fit-content;
+  border: rem(1px) solid transparent;
+  border-radius: rem(4px);
+  line-height: 1.4;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* dot 모드: 채우기 없이 "점 + 평문" */
+.#{$IS_DOT} {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--m2m-pg-comp-text);
+}
+
+.bsBadgeDot {
+  width: rem(8px);
+  height: rem(8px);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  padding: rem(2px) rem(6px);
+  @include typo('Micro/Medium');
+}
+
+.#{$SIZE_MD} {
+  padding: rem(4px) rem(10px);
+  @include typo('Caption/Medium');
+}
+
+.#{$SIZE_LG} {
+  padding: rem(6px) rem(14px);
+  @include typo('Sub/Medium');
+}
+
+.#{$IS_DOT}.#{$SIZE_SM},
+.#{$IS_DOT}.#{$SIZE_MD},
+.#{$IS_DOT}.#{$SIZE_LG} {
+  padding: 0;
+}
+
+/* ── type: solid ──────────────────────── */
+.#{$TYPE_PRIMARY} {
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+}
+.#{$TYPE_SECONDARY} {
+  background-color: var(--m2m-pg-secondary-bg);
+  color: var(--m2m-pg-secondary-text);
+}
+.#{$TYPE_SUCCESS} {
+  background-color: var(--m2m-pg-success);
+  color: #fff;
+}
+.#{$TYPE_WARNING} {
+  background-color: var(--m2m-pg-warning);
+  color: #fff;
+}
+.#{$TYPE_DANGER} {
+  background-color: var(--m2m-pg-error);
+  color: #fff;
+}
+.#{$TYPE_INFO} {
+  background-color: var(--m2m-pg-info);
+  color: #fff;
+}
+.#{$TYPE_GHOST} {
+  background-color: var(--m2m-pg-comp-bg-hover);
+  color: var(--m2m-pg-comp-text-sub);
+}
+
+/* ── type: light (배경 옅게 + 테두리) ─── */
+.#{$TYPE_PRIMARY_LIGHT} {
+  background-color: var(--m2m-pg-brand-light);
+  border-color: var(--m2m-pg-brand-border);
+  color: var(--m2m-pg-brand);
+}
+.#{$TYPE_SUCCESS_LIGHT} {
+  background-color: var(--m2m-pg-success-bg);
+  border-color: var(--m2m-pg-success-border);
+  color: var(--m2m-pg-success);
+}
+.#{$TYPE_WARNING_LIGHT} {
+  background-color: var(--m2m-pg-warning-bg);
+  border-color: var(--m2m-pg-warning-border);
+  color: var(--m2m-pg-warning-dark);
+}
+.#{$TYPE_DANGER_LIGHT} {
+  background-color: var(--m2m-pg-error-bg);
+  border-color: var(--m2m-pg-error-border);
+  color: var(--m2m-pg-error-dark);
+}
+.#{$TYPE_INFO_LIGHT} {
+  background-color: var(--m2m-pg-info-bg);
+  border-color: var(--m2m-pg-info-border);
+  color: var(--m2m-pg-info-dark);
+}
+
+/* ── state ────────────────────────────── */
+.#{$IS_ROUND} {
+  border-radius: rem(999px);
+}

@@ -1,0 +1,103 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / channel 클래스명 (단일 소스) ──────────────────────────
+$CHANNEL_KAKAO: 'bsShareSheetChannelKakao';
+$CHANNEL_FACEBOOK: 'bsShareSheetChannelFacebook';
+$CHANNEL_TWITTER: 'bsShareSheetChannelTwitter';
+$CHANNEL_WHATSAPP: 'bsShareSheetChannelWhatsapp';
+
+.bsShareSheet {
+  width: 100%;
+}
+
+.bsShareSheetUrlRow {
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+  padding: rem(10px) rem(14px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(999px);
+  background: var(--m2m-pg-comp-bg-subtle);
+}
+
+.bsShareSheetUrl {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Body/Regular');
+  @include text-ellipsis(1);
+}
+
+.bsShareSheetCopyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: rem(32px);
+  height: rem(32px);
+  border: 0;
+  border-radius: 50%;
+  background: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: var(--m2m-pg-comp-bg-hover);
+  }
+}
+
+.bsShareSheetGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: rem(12px);
+  margin-top: rem(20px);
+}
+
+.bsShareSheetChannel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(8px);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.bsShareSheetChannelIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(48px);
+  height: rem(48px);
+  border-radius: 50%;
+  transition: transform 0.15s ease;
+
+  svg {
+    width: rem(24px);
+    height: rem(24px);
+  }
+}
+
+.bsShareSheetChannel:hover .bsShareSheetChannelIcon {
+  transform: scale(1.06);
+}
+
+.#{$CHANNEL_KAKAO} {
+  background-color: #fee500;
+}
+.#{$CHANNEL_FACEBOOK} {
+  background-color: #1877f2;
+}
+.#{$CHANNEL_TWITTER} {
+  background-color: #1da1f2;
+}
+.#{$CHANNEL_WHATSAPP} {
+  background-color: #25d366;
+}
+
+.bsShareSheetChannelLabel {
+  color: var(--m2m-pg-comp-text-sub);
+  @include typo('Caption/Medium');
+}

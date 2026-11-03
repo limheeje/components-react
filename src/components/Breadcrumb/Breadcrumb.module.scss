@@ -1,0 +1,78 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_CURRENT: 'is-current';
+$SIZE_LG: 'bsBreadcrumbSizeLg';
+$SIZE_MD: 'bsBreadcrumbSizeMd';
+$SIZE_SM: 'bsBreadcrumbSizeSm';
+
+.bsBreadcrumb {
+  color: var(--m2m-pg-comp-text-muted);
+}
+
+.bsBreadcrumbList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: rem(4px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bsBreadcrumbItem,
+.bsBreadcrumbSeparator {
+  display: flex;
+  align-items: center;
+}
+
+.bsBreadcrumbSeparator {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-disabled);
+}
+
+.bsBreadcrumbLink,
+.bsBreadcrumbLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(4px);
+}
+
+.bsBreadcrumbLink {
+  color: var(--m2m-pg-comp-text-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--m2m-pg-brand);
+  }
+}
+
+.#{$IS_CURRENT} {
+  color: var(--m2m-pg-comp-text);
+  font-weight: 600;
+}
+
+.bsBreadcrumbExpand {
+  display: inline-flex;
+  align-items: center;
+  padding: rem(1px) rem(6px);
+  border: 0;
+  border-radius: rem(4px);
+  background-color: var(--m2m-pg-comp-bg-hover);
+  color: var(--m2m-pg-comp-text-muted);
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  @include typo('Caption/Regular');
+}
+.#{$SIZE_MD} {
+  @include typo('Body/Regular');
+}
+.#{$SIZE_LG} {
+  @include typo('Head/Regular');
+}

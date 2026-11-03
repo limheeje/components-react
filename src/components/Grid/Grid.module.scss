@@ -1,0 +1,12 @@
+@use '~/assets/styles/theme' as *;
+
+/* 레이아웃 값(columns/gap/정렬)은 동적 prop 이라 인라인 스타일로 적용된다.
+   여기서는 최소 베이스만. */
+.bsGrid {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bsGridItem {
+  min-width: 0;
+}

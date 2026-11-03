@@ -1,0 +1,67 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_DISABLED: 'is-disabled';
+$IS_OPEN: 'is-open';
+
+.bsAccordion {
+  width: 100%;
+}
+
+.bsAccordionItem {
+  margin-bottom: rem(6px);
+  border: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(8px);
+  overflow: hidden;
+
+  &.#{$IS_DISABLED} {
+    opacity: 0.5;
+  }
+}
+
+.bsAccordionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(12px);
+  padding: rem(12px) rem(16px);
+  border: none;
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text);
+  cursor: pointer;
+  text-align: left;
+  @include typo('Head/Regular');
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.bsAccordionTitle {
+  flex: 1;
+}
+
+.bsAccordionChevron {
+  flex-shrink: 0;
+  color: var(--m2m-pg-comp-text-muted);
+  transition: transform 0.2s ease;
+}
+
+.bsAccordionContent {
+  padding: rem(12px) rem(16px);
+  border-top: rem(1px) solid var(--m2m-pg-comp-border);
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-comp-text-muted);
+  @include typo('Body/Regular');
+}
+
+/* ── open ─────────────────────────────── */
+.#{$IS_OPEN} .bsAccordionHeader {
+  background-color: var(--m2m-pg-comp-bg-subtle);
+  font-weight: 600;
+}
+
+.#{$IS_OPEN} .bsAccordionChevron {
+  transform: rotate(180deg);
+}

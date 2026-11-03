@@ -1,0 +1,154 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_ACTIVE: 'is-active';
+$IS_CENTERED: 'is-centered';
+$IS_DISABLED: 'is-disabled';
+$IS_FULL_WIDTH: 'is-full-width';
+$SIZE_LG: 'bsTabsSizeLg';
+$SIZE_MD: 'bsTabsSizeMd';
+$SIZE_SM: 'bsTabsSizeSm';
+$TYPE_CARD: 'bsTabsTypeCard';
+$TYPE_LINE: 'bsTabsTypeLine';
+$TYPE_PILL: 'bsTabsTypePill';
+
+.bsTabs {
+  width: 100%;
+}
+
+.bsTabsBar {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.bsTabsTab {
+  display: flex;
+  align-items: center;
+  gap: rem(6px);
+  border: none;
+  background: transparent;
+  color: var(--m2m-pg-comp-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.18s ease;
+  @include typo('Body/Regular');
+
+  &.#{$IS_DISABLED} {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.bsTabsTabIcon {
+  display: flex;
+}
+
+.bsTabsBadge {
+  min-width: rem(16px);
+  padding: rem(1px) rem(5px);
+  border-radius: rem(999px);
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+  line-height: 1.6;
+  text-align: center;
+  @include typo('Micro/Bold');
+}
+
+.bsTabsPanel {
+  padding: rem(20px) rem(4px);
+}
+
+/* ── centered / fullWidth ─────────────── */
+.#{$IS_CENTERED} .bsTabsBar {
+  justify-content: center;
+}
+
+.#{$IS_FULL_WIDTH} .bsTabsTab {
+  flex: 1;
+  justify-content: center;
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} .bsTabsTab {
+  padding: rem(6px) rem(12px);
+  @include typo('Sub/Regular');
+}
+.#{$SIZE_MD} .bsTabsTab {
+  padding: rem(9px) rem(16px);
+  @include typo('Body/Regular');
+}
+.#{$SIZE_LG} .bsTabsTab {
+  padding: rem(12px) rem(20px);
+  @include typo('Head/Regular');
+}
+
+/* ── type: line ───────────────────────── */
+.#{$TYPE_LINE} .bsTabsBar {
+  border-bottom: rem(1px) solid var(--m2m-pg-comp-border);
+}
+.#{$TYPE_LINE} .bsTabsTab {
+  border-bottom: rem(2px) solid transparent;
+  margin-bottom: rem(-1px);
+
+  &.#{$IS_ACTIVE} {
+    color: var(--m2m-pg-brand);
+    font-weight: 700;
+    border-bottom-color: var(--m2m-pg-brand);
+  }
+}
+
+/* ── type: card ───────────────────────── */
+.#{$TYPE_CARD} .bsTabsBar {
+  gap: 0;
+  padding: rem(6px) rem(6px) 0;
+  border-bottom: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: rem(10px) rem(10px) 0 0;
+  background-color: var(--m2m-pg-comp-bg-disabled);
+}
+.#{$TYPE_CARD} .bsTabsTab {
+  border: rem(1px) solid transparent;
+  border-radius: rem(8px) rem(8px) 0 0;
+
+  &.#{$IS_ACTIVE} {
+    color: var(--m2m-pg-brand);
+    font-weight: 600;
+    background-color: var(--m2m-pg-comp-bg);
+    border-color: var(--m2m-pg-comp-border);
+    border-bottom-color: var(--m2m-pg-comp-bg);
+  }
+}
+.#{$TYPE_CARD} .bsTabsPanel {
+  border-right: rem(1px) solid var(--m2m-pg-comp-border);
+  border-bottom: rem(1px) solid var(--m2m-pg-comp-border);
+  border-left: rem(1px) solid var(--m2m-pg-comp-border);
+  border-radius: 0 0 rem(8px) rem(8px);
+  background-color: var(--m2m-pg-comp-bg);
+}
+
+/* ── type: pill ───────────────────────── */
+.#{$TYPE_PILL} .bsTabsBar {
+  width: fit-content;
+  gap: rem(4px);
+  padding: rem(4px);
+  border-radius: rem(999px);
+  background-color: var(--m2m-pg-comp-bg-disabled);
+}
+.#{$TYPE_PILL}.#{$IS_FULL_WIDTH} .bsTabsBar {
+  width: 100%;
+}
+.#{$TYPE_PILL} .bsTabsTab {
+  border-radius: rem(999px);
+
+  &.#{$IS_ACTIVE} {
+    color: #fff;
+    font-weight: 600;
+    background-color: var(--m2m-pg-brand);
+  }
+}
+
+/* ── active badge 반전 ────────────────── */
+.bsTabsTab.#{$IS_ACTIVE} .bsTabsBadge {
+  background-color: var(--m2m-pg-comp-bg);
+  color: var(--m2m-pg-brand);
+}

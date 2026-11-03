@@ -1,0 +1,98 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_STICKY: 'is-sticky';
+$TYPE_DEFAULT: 'bsHeaderTypeDefault';
+$TYPE_PRIMARY: 'bsHeaderTypePrimary';
+
+.bsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(12px);
+  width: 100%;
+  padding: rem(12px) rem(20px);
+  border-radius: rem(8px);
+  box-sizing: border-box;
+}
+
+.#{$TYPE_DEFAULT} {
+  background-color: var(--m2m-pg-comp-bg);
+  border-bottom: rem(1px) solid var(--m2m-pg-comp-border);
+  color: var(--m2m-pg-comp-text);
+}
+
+.#{$TYPE_PRIMARY} {
+  background-color: var(--m2m-pg-brand);
+  color: #fff;
+}
+
+.#{$IS_STICKY} {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 rem(2px) rem(10px) rgb(0 0 0 / 8%);
+}
+
+.bsHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  min-width: 0;
+}
+
+.bsHeaderBack,
+.bsHeaderAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem(2px);
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bsHeaderLogo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.bsHeaderTitle {
+  @include text-ellipsis(1);
+  @include typo('Title3/Semibold');
+}
+.#{$TYPE_DEFAULT} .bsHeaderTitle {
+  color: var(--m2m-pg-comp-text);
+}
+
+.bsHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: rem(12px);
+  flex-shrink: 0;
+}
+
+.bsHeaderAction {
+  position: relative;
+}
+.#{$TYPE_DEFAULT} .bsHeaderAction {
+  color: var(--m2m-pg-comp-text-sub);
+}
+
+.bsHeaderBadge {
+  position: absolute;
+  top: rem(-4px);
+  right: rem(-6px);
+  min-width: rem(15px);
+  height: rem(15px);
+  padding: 0 rem(3px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: rem(8px);
+  background-color: var(--m2m-pg-error);
+  color: #fff;
+  @include typo('Micro/Bold');
+}

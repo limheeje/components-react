@@ -1,0 +1,114 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_DISABLED: 'is-disabled';
+$IS_ERROR: 'is-error';
+$SIZE_LG: 'bsSwitchSizeLg';
+$SIZE_MD: 'bsSwitchSizeMd';
+$SIZE_SM: 'bsSwitchSizeSm';
+
+.bsSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(10px);
+  cursor: pointer;
+  user-select: none;
+  color: var(--m2m-pg-comp-text);
+
+  &.#{$IS_DISABLED} {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.bsSwitchInput {
+  @include hidden;
+}
+
+.bsSwitchTrack {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: rem(999px);
+  background-color: var(--m2m-pg-comp-border-sub);
+  transition: background-color 0.2s ease;
+}
+
+.bsSwitchThumb {
+  position: absolute;
+  top: 50%;
+  border-radius: 50%;
+  background-color: var(--m2m-pg-comp-bg);
+  box-shadow: 0 rem(1px) rem(3px) rgba(0, 0, 0, 0.2);
+  transform: translate(0, -50%);
+  transition: transform 0.2s ease;
+}
+
+.bsSwitchInput:checked ~ .bsSwitchTrack {
+  background-color: var(--m2m-pg-brand);
+}
+
+.bsSwitchInput:focus-visible ~ .bsSwitchTrack {
+  outline: rem(2px) solid var(--m2m-pg-brand);
+  outline-offset: rem(2px);
+}
+
+.bsSwitch.#{$IS_ERROR} .bsSwitchTrack {
+  outline: rem(2px) solid var(--m2m-pg-error);
+  outline-offset: rem(1px);
+}
+
+/* ── size (track w/h · thumb · 이동거리) ─────────────── */
+.#{$SIZE_SM} {
+  .bsSwitchTrack {
+    width: rem(32px);
+    height: rem(18px);
+  }
+  .bsSwitchThumb {
+    left: rem(2px);
+    width: rem(14px);
+    height: rem(14px);
+  }
+  .bsSwitchInput:checked ~ .bsSwitchTrack .bsSwitchThumb {
+    transform: translate(rem(14px), -50%);
+  }
+  .bsSwitchLabel {
+    @include typo('Sub/Regular');
+  }
+}
+
+.#{$SIZE_MD} {
+  .bsSwitchTrack {
+    width: rem(44px);
+    height: rem(24px);
+  }
+  .bsSwitchThumb {
+    left: rem(2px);
+    width: rem(20px);
+    height: rem(20px);
+  }
+  .bsSwitchInput:checked ~ .bsSwitchTrack .bsSwitchThumb {
+    transform: translate(rem(20px), -50%);
+  }
+  .bsSwitchLabel {
+    @include typo('Head/Regular');
+  }
+}
+
+.#{$SIZE_LG} {
+  .bsSwitchTrack {
+    width: rem(56px);
+    height: rem(30px);
+  }
+  .bsSwitchThumb {
+    left: rem(2px);
+    width: rem(26px);
+    height: rem(26px);
+  }
+  .bsSwitchInput:checked ~ .bsSwitchTrack .bsSwitchThumb {
+    transform: translate(rem(26px), -50%);
+  }
+  .bsSwitchLabel {
+    @include typo('Title3/Regular');
+  }
+}

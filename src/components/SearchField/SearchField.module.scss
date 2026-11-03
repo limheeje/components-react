@@ -1,0 +1,122 @@
+@use '~/assets/styles/theme' as *;
+
+// ── modifier / state 클래스명 (단일 소스) ──────────────────────────
+$IS_DISABLED: 'is-disabled';
+$IS_FOCUSED: 'is-focused';
+$SIZE_LG: 'bsSearchFieldSizeLg';
+$SIZE_MD: 'bsSearchFieldSizeMd';
+$SIZE_SM: 'bsSearchFieldSizeSm';
+
+.bsSearchField {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  border: rem(1.5px) solid var(--m2m-pg-comp-border-sub);
+  border-radius: rem(999px);
+  background-color: var(--m2m-pg-comp-bg);
+  transition: border-color 0.15s ease;
+
+  &.#{$IS_FOCUSED} {
+    border-color: var(--m2m-pg-brand);
+  }
+
+  &.#{$IS_DISABLED} {
+    background-color: var(--m2m-pg-comp-bg-disabled);
+    opacity: 0.7;
+  }
+}
+
+.bsSearchFieldInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--m2m-pg-comp-text);
+  font-family: inherit;
+
+  &::placeholder {
+    color: var(--m2m-pg-comp-text-disabled);
+  }
+
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+.bsSearchFieldSearchButton,
+.bsSearchFieldClearButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--m2m-pg-comp-text-disabled);
+  transition: color 0.15s ease;
+}
+
+.bsSearchFieldSearchButton {
+  color: var(--m2m-pg-comp-text-muted);
+
+  &:hover:not(:disabled) {
+    color: var(--m2m-pg-brand);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.bsSearchFieldClearButton:hover {
+  color: var(--m2m-pg-comp-text-muted);
+}
+
+.bsSearchFieldIcon {
+  display: block;
+}
+
+/* ── size ─────────────────────────────── */
+.#{$SIZE_SM} {
+  padding: 0 rem(10px);
+  .bsSearchFieldInput {
+    padding: rem(5px) rem(6px);
+    @include typo('Sub/Regular');
+  }
+  .bsSearchFieldSearchButton,
+  .bsSearchFieldClearButton {
+    font-size: rem(14px);
+  }
+}
+
+.#{$SIZE_MD} {
+  padding: 0 rem(12px);
+  .bsSearchFieldInput {
+    padding: rem(8px) rem(8px);
+    @include typo('Head/Regular');
+    /* iOS Safari 포커스 시 자동 확대 방지 */
+    font-size: rem(16px);
+  }
+  .bsSearchFieldSearchButton,
+  .bsSearchFieldClearButton {
+    font-size: rem(16px);
+  }
+}
+
+.#{$SIZE_LG} {
+  padding: 0 rem(14px);
+  .bsSearchFieldInput {
+    padding: rem(11px) rem(10px);
+    @include typo('Title3/Regular');
+    /* iOS Safari 포커스 시 자동 확대 방지 */
+    font-size: rem(17px);
+  }
+  .bsSearchFieldSearchButton,
+  .bsSearchFieldClearButton {
+    font-size: rem(18px);
+  }
+}
